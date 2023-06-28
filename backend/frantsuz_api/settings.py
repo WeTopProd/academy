@@ -23,7 +23,7 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = [
         'frantsuz.ru',
-        '185.46.10.37',
+        '89.108.70.233',
     ]
 
 INSTALLED_APPS = [
