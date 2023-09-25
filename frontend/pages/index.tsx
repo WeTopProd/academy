@@ -12,7 +12,7 @@ import { GetServerSideProps, GetStaticProps } from 'next';
 
 
 
-const Index = () => {
+const Index = ():JSX.Element => {
     return (
         <>
             <main className='mainPage'>
