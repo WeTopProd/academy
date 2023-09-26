@@ -157,7 +157,7 @@ DJOSER = {
     'ACTIVATION_URL': 'activation/{uid}/{token}',
     'PASSWORD_RESET_CONFIRM_URL': 'reset_password_confirm/?uid={uid}&token={token}',
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
-    'SEND_ACTIVATION_EMAIL': True,
+    'SEND_ACTIVATION_EMAIL': False,
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND': True,
     'LOGOUT_ON_PASSWORD_CHANGE': True,
