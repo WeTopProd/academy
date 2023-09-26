@@ -33,7 +33,6 @@ export type AppDispatch = RootStore['dispatch'];
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action>;
 
 
-
 export default store;
 
 export const useAppDispatch: () => AppDispatch = useDispatch
