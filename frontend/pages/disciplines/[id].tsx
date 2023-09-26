@@ -107,15 +107,7 @@ const Disciplines: FC = () => {
                                     </div>
                                 </>
                         }
-                        {/* : ()=>{console.log('teacher false');
 
-                        return <div className={styles.teacher_skeleton}>
-                            <div className={styles.image}></div>
-                            <span className={styles.first_line}>
-                            </span>
-                            <span className={styles.first_line}>
-                            </span>
-                        </div>} */}
 
                     </div>
                 </section>
