@@ -50,7 +50,7 @@ const Header = () => {
 
   const handleContactUs = () => {
     dispatch(openModal(true));
-    dispatch(resetSent());
+    dispatch(resetSent(true));
   };
 
   return (
