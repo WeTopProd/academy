@@ -1,4 +1,7 @@
-const teachersInfo = [
+import { ITeacherLarge } from "../../../types/teacherType";
+
+
+export const teacherInfoSeed: Array<ITeacherLarge> = [
     {
         id: '1',
         fullName: 'Моисеев Денис Борисович',
@@ -95,3 +98,5 @@ const teachersInfo = [
         ]
     },
 ]
+
+export default teacherInfoSeed

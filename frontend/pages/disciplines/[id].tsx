@@ -6,23 +6,18 @@ import Image from "next/image";
 import Banner from "../../components/PageComponents/Main/Banner/Banner";
 import Gallery from "../../components/PageComponents/Main/Gallery/Gallery";
 import { useDispatch } from 'react-redux';
-import { disciplineGetOne } from "../../ReduxOnReducers/disciplines/useDiscipline";
 
 
 const Disciplines: FC = () => {
     const router = useRouter()
     const { id } = router.query
-    const dispatch = useDispatch()
 
     const disciplines = useAppSelector((state) => state.disciplines.find(item => { return item.id == Number(id) }))
+    
 
-    const teacherOldMethod = useAppSelector((state) => state.teacher.filter(item => {
+    const teacher = useAppSelector((state) => state.teacher.filter(item => {
         return (item.disciplines.map(i => i.name).includes(disciplines?.type))
     }))
-
-
-    const teacher:any = dispatch(disciplineGetOne(id))
-    
 
 
     return (

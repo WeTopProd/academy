@@ -7,9 +7,9 @@ import {
 import { combineReducers } from 'redux';
 import { createWrapper } from 'next-redux-wrapper';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import teacherSlice from './slices/teacherSlice';
-import LargeTeacherSlice from './slices/LargeTeacherSlice';
-import disciplinesSlice from './slices/disciplinesSlice';
+import teacherSlice from './slices/teacher/teacherSlice';
+import LargeTeacherSlice from './slices/teacher/LargeTeacherSlice';
+import disciplinesSlice from './slices/disciplines/disciplinesSlice';
 import modalSlice from './slices/modalSlice';
 import { mailApi } from './api/mailApi';
 import { loginApi } from './api/loginApi';

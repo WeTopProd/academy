@@ -1,4 +1,9 @@
-const teachers = [
+import { DisciplinesTypes } from '../../../types';
+
+import { Idisciplines, ITeacher } from '../../../types/teacherType';
+
+
+export const teacherSeed: ITeacher[] = [
   {
     id: 1,
     name: 'Денис Моисеев',
@@ -191,3 +196,5 @@ const teachers = [
     ],
   },
 ];
+
+export default teacherSeed;

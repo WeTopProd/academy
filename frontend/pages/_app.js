@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Layout from '../components/PageComponents/Layout/Layout';
 import { Provider } from 'react-redux';
 import store, { useAppDispatch, useAppSelector, wrapper } from '../redux/store';
-import store2 from '../ReduxOnReducers/store'
+// import store2 from '../ReduxOnReducers/store'
 import UniverseModal from '../components/UniversalComponents/UniverseModal/UniverseModal'
 import { openModal } from '../redux/slices/modalSlice';
 import { sent } from '../redux/slices/sendFormConfirmation';
