@@ -26,6 +26,9 @@ const UniverseModal: React.FC<props> = ({ title }: props, sent: any) => {
   const handleCancel = () => {
     dispatch(closeModal(true));
   };
+  // const styleModal = {
+  //   width: '90000px',
+  // };
 
   return (
     <>
@@ -47,6 +50,7 @@ const UniverseModal: React.FC<props> = ({ title }: props, sent: any) => {
           className={styles.modal_container}
           footer={null}
           destroyOnClose={true}
+          // style={styleModal}
         >
           <FeedBackSent />
         </Modal>
