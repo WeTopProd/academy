@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from './Teacher.module.scss';
 import Link from 'next/link';
-import { ITeacher } from '../../../../../redux/slices/teacher/teacherSlice';
+import { ITeacher } from '../../../../../redux/types/teacherType';
 import { useRouter } from 'next/router';
 
 const Teacher = ({ name, ImageURL, description, id }) => {
