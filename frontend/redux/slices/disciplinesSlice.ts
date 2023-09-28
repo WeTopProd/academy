@@ -474,9 +474,9 @@ export const disciplines = createSlice({
     name: 'disciplines',
     initialState,
     reducers: {
-        getOneTeacher:(state, PayloadAction) => {
-            state = state.filter((el)=>el.id == PayloadAction)
-        }
+        // getOneTeacher:(state, PayloadAction) => {
+        //     state = state.filter((el)=>el.id == PayloadAction)
+        // }
     },
 })
 
