@@ -7,6 +7,8 @@ import { useAppDispatch } from '../../../redux/store'
 
 import { openModal } from "../../../redux/slices/modalSlice";
 import LoginForm from "../../UniversalComponents/Forms/LoginForm/LoginForm";
+import { sent, resetSent } from "../../../redux/slices/sendFormConfirmation";
+
 const Header = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -75,7 +77,8 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className={styles.feed_back}>
-                    <div onClick={() => dispatch(openModal(true))}>
+                    <div onClick={() => {dispatch(openModal(true))
+                    dispatch(resetSent())} }>
                         <button className={styles.text}>
                             Обратный звонок
                         </button>

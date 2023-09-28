@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { useForm, Resolver } from 'react-hook-form';
 import styles from './styles.module.scss'
-import { useSendEmailMutation } from '../../../../redux/api/mailApi';
+import { useSendEmailMutation, mailApi2 } from '../../../../redux/api/mailApi';
 
 import InputMask from 'react-input-mask'
 import Spinner from '../../spinner/Spinner';
+import { useAppDispatch } from '../../../../redux/store';
+import { openModal,closeModal } from "../../../../redux/slices/modalSlice";
+import { sent, resetSent } from "../../../../redux/slices/sendFormConfirmation";
+
+import FeedBackSent from './FeedBackSent';
+import { useEffect } from 'react';
 
 type FormValues = {
   first_name: string;
@@ -45,19 +51,36 @@ export default function App() {
   const [value, setValue] = useState('')
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ resolver });
   const [sendEmail, { isLoading, isSuccess, isError, status }] = useSendEmailMutation()
+//   // mOVE IT TO THE UNIVERSAL MODAL _APP
+const [toggler, setToggler]= useState(true)
+  const dispatch = useAppDispatch()
+
+
   const onSubmit = handleSubmit(async (data: FormValues) => {
     data.phone = await phoneForBackend(data.phone)
-    await sendEmail({
-      id: 1,
-      data: data
+    // await sendEmail({
+    //   id: 1,
+    //   data: data
+    // })
+    mailApi2.sendEmail(1,data).then(()=>{
+      dispatch(sent())
+    setTimeout(()=>{
+      dispatch(closeModal())
+      dispatch(resetSent())
+    },5000)
     })
+    // console.log({...data, date: new Date});
+    // setToggler(false)
+ 
   }
   );
 
+  
 
 
   return (
-    <form onSubmit={onSubmit} className={styles.form}>
+    <>
+     <form onSubmit={onSubmit} className={styles.form}>
       <span>
         и мы свяжемся с вами в ближайшее время
       </span>
@@ -68,7 +91,6 @@ export default function App() {
         maskChar="_"
         alwaysShowMask
         {...register("phone")}
-      // beforeMaskedValueChange={beforeMaskedValueChange}
       />
       {errors?.phone && <p>{errors.phone.message}</p>}
       <textarea {...register("description")} placeholder="Комментарий" />
@@ -88,8 +110,9 @@ export default function App() {
           Ошибка
         </div>
       }
-      {status === 'uninitialized' && <input type="submit" value={'Отправить'} className={styles.submit} />}
+     <input type="submit" value={'Отправить'} className={styles.submit} />
 
     </form>
+    </>
   );
 }

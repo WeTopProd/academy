@@ -1,40 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
-import { DisciplinesTypes } from '../types'
-
-
-interface Icost {
-    name: string,
-    price: string,
-    type: type
-}
-
-interface Iskills {
-    name: string,
-    price: string,
-    type: type
-}
-
-
-enum type { group, individual, course }
-enum resize { resize = '-square' }
-
-export interface Idisciplines {
-    id: number
-    name: string,
-    name_sklonenie: string,
-    type: DisciplinesTypes,
-    ImageURL: string,
-    ImageType: string,
-    ImageURLResize?: string,
-    description: string,
-    lesson_duration: string,
-    cost: Icost[],
-    skills: string[],
-    recomended_lesson_count: string
-}
-
-const initialState: Idisciplines[] = [
+import {DisciplinesTypes, type, resize} from '../type/DisciplinesType'
+export const disciplineSeed = [
     {
         id: 1,
         name: 'веб-дизайнер',
@@ -470,15 +435,5 @@ const initialState: Idisciplines[] = [
 
 ]
 
-export const disciplines = createSlice({
-    name: 'disciplines',
-    initialState,
-    reducers: {
-        getOneTeacher:(state, PayloadAction) => {
-            state = state.filter((el)=>el.id == PayloadAction)
-        }
-    },
-})
 
 
-export default disciplines.reducer

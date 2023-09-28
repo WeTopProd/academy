@@ -5,17 +5,24 @@ import { useAppSelector } from "../../redux/store";
 import Image from "next/image";
 import Banner from "../../components/PageComponents/Main/Banner/Banner";
 import Gallery from "../../components/PageComponents/Main/Gallery/Gallery";
+import { useDispatch } from 'react-redux';
+import { disciplineGetOne } from "../../ReduxOnReducers/disciplines/useDiscipline";
 
 
 const Disciplines: FC = () => {
     const router = useRouter()
     const { id } = router.query
+    const dispatch = useDispatch()
 
     const disciplines = useAppSelector((state) => state.disciplines.find(item => { return item.id == Number(id) }))
 
-    const teacher = useAppSelector((state) => state.teacher.filter(item => {
+    const teacherOldMethod = useAppSelector((state) => state.teacher.filter(item => {
         return (item.disciplines.map(i => i.name).includes(disciplines?.type))
     }))
+
+
+    const teacher = dispatch(disciplineGetOne(id))
+    
 
 
     return (
@@ -85,7 +92,7 @@ const Disciplines: FC = () => {
                     </h1>
                     <div className={styles.teacher_container}>
                         {
-                            teacher.length != 0 ?
+                            teacher.length  ?
                                 teacher.map(item => {
                                     return (<div className={styles.teacher}>
                                         <Image src={item.ImageURL + '.png'} width={200} height={200} alt="Фото учителя" />
@@ -96,6 +103,7 @@ const Disciplines: FC = () => {
                                 })
                                 :
                                 <>
+                                
                                     <div className={styles.teacher_skeleton}>
                                         <div className={styles.image}></div>
                                         <div className={styles.text}>
