@@ -21,7 +21,7 @@ const Disciplines: FC = () => {
     }))
 
 
-    const teacher = dispatch(disciplineGetOne(id))
+    const teacher:any = dispatch(disciplineGetOne(id))
     
 
 
