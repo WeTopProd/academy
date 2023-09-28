@@ -26,7 +26,7 @@ const Intro = () => {
                 <h2 className={styles.h2}>
                     Курсы, разработанные с учетом потребностей в реалиях 21 века
                 </h2>
-                <button className={styles.button} onClick={() => { dispatch(openModal()) }}>
+                <button className={styles.button} onClick={() => { dispatch(openModal(true)) }}>
                     Записаться  <span> на пробное занятие</span>
                 </button>
                 <div className={styles.sliding_arrow}>

@@ -63,10 +63,10 @@ const [toggler, setToggler]= useState(true)
     //   data: data
     // })
     mailApi2.sendEmail(1,data).then(()=>{
-      dispatch(sent())
+      dispatch(sent(true))
     setTimeout(()=>{
-      dispatch(closeModal())
-      dispatch(resetSent())
+      dispatch(closeModal(true))
+      dispatch(resetSent(true))
     },5000)
     })
     // console.log({...data, date: new Date});
