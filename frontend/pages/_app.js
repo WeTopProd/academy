@@ -8,6 +8,7 @@ import UniverseModal from '../components/UniversalComponents/UniverseModal/Unive
 import { openModal } from '../redux/slices/modalSlice';
 import { sent } from '../redux/slices/sendFormConfirmation';
 import { useDispatch } from 'react-redux';
+import './modal.css'
 
 
 function MyApp({ Component, pageProps }) {

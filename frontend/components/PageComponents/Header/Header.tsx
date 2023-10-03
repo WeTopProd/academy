@@ -17,6 +17,7 @@ import { useAppDispatch } from '../../../redux/store';
 import { openModal } from '../../../redux/slices/modalSlice';
 import LoginForm from '../../UniversalComponents/Forms/LoginForm/LoginForm';
 import { sent, resetSent } from '../../../redux/slices/sendFormConfirmation';
+import { RegistrationForm } from '../../UniversalComponents/Forms/registerationForm/RegistrationForm';
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -52,6 +53,8 @@ const Header = () => {
     dispatch(openModal(true));
     dispatch(resetSent(true));
   };
+  const [logRegToggler,setLogRegToggler] = useState(true)
+
 
   return (
     <header className={styles.page_header}>
@@ -117,7 +120,9 @@ const Header = () => {
               onCancel={handleCancel}
               footer={null}
             >
-              <LoginForm />
+
+              {logRegToggler?<LoginForm setLogRegToggler={setLogRegToggler} />:
+              <RegistrationForm setLogRegToggler={setLogRegToggler} />}
             </Modal>
           </>
         </div>

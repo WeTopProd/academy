@@ -26,9 +26,8 @@ const UniverseModal: React.FC<props> = ({ title }: props, sent: any) => {
   const handleCancel = () => {
     dispatch(closeModal(true));
   };
-  // const styleModal = {
-  //   width: '90000px',
-  // };
+
+
 
   return (
     <>

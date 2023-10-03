@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useForm, Resolver } from 'react-hook-form';
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 import { useSendEmailMutation, mailApi2 } from '../../../../redux/api/mailApi';
 
-import InputMask from 'react-input-mask'
+import InputMask from 'react-input-mask';
 import Spinner from '../../spinner/Spinner';
 import { useAppDispatch } from '../../../../redux/store';
-import { openModal,closeModal } from "../../../../redux/slices/modalSlice";
-import { sent, resetSent } from "../../../../redux/slices/sendFormConfirmation";
+import { openModal, closeModal } from '../../../../redux/slices/modalSlice';
+import { sent, resetSent } from '../../../../redux/slices/sendFormConfirmation';
 
 import FeedBackSent from './FeedBackSent';
 import { useEffect } from 'react';
@@ -18,101 +18,81 @@ type FormValues = {
   description: string;
 };
 
-
 const resolver: Resolver<FormValues> = async (values) => {
   return {
     values: values.first_name ? values : {},
     errors: !values.first_name
       ? {
-        first_name: {
-          type: 'required',
-          message: 'Обязательное поле',
-        },
-        phone: {
-          type: 'required',
-          message: 'Обязательное поле',
-        },
-      }
+          first_name: {
+            type: 'required',
+            message: 'Обязательное поле',
+          },
+          phone: {
+            type: 'required',
+            message: 'Обязательное поле',
+          },
+        }
       : {},
   };
 };
 
 const phoneForBackend = async (phone: string) => {
-  ['(', ')', '-', '-'].map(item => {
-    phone = phone.replace(item, '')
-  })
+  ['(', ')', '-', '-'].map((item) => {
+    phone = phone.replace(item, '');
+  });
   console.log(phone);
 
-  return phone
-}
+  return phone;
+};
 
 export default function App() {
+  const [value, setValue] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({ resolver });
+  const [sendEmail, { isLoading, isSuccess, isError, status }] =
+    useSendEmailMutation();
 
-  const [value, setValue] = useState('')
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ resolver });
-  const [sendEmail, { isLoading, isSuccess, isError, status }] = useSendEmailMutation()
-//   // mOVE IT TO THE UNIVERSAL MODAL _APP
-const [toggler, setToggler]= useState(true)
-  const dispatch = useAppDispatch()
-
+  const [toggler, setToggler] = useState(true);
+  const dispatch = useAppDispatch();
 
   const onSubmit = handleSubmit(async (data: FormValues) => {
-    data.phone = await phoneForBackend(data.phone)
-    // await sendEmail({
-    //   id: 1,
-    //   data: data
-    // })
-    mailApi2.sendEmail(1,data).then(()=>{
-      dispatch(sent(true))
-    setTimeout(()=>{
-      dispatch(closeModal(true))
-      dispatch(resetSent(true))
-    },5000)
-    })
-    // console.log({...data, date: new Date});
-    // setToggler(false)
- 
-  }
-  );
+    data.phone = await phoneForBackend(data.phone);
 
-  
-
+    mailApi2.sendEmail(1, data).then(() => {
+      dispatch(sent(true));
+      setTimeout(() => {
+        dispatch(closeModal(true));
+        dispatch(resetSent(true));
+      }, 5000);
+    });
+  });
 
   return (
     <>
-     <form onSubmit={onSubmit} className={styles.form}>
-      <span>
-        и мы свяжемся с вами в ближайшее время
-      </span>
-      <input {...register("first_name")} placeholder="Имя" />
-      {errors?.first_name && <p>{errors.first_name.message}</p>}
-      <InputMask
-        mask="+7(999)999-99-99"
-        maskChar="_"
-        alwaysShowMask
-        {...register("phone")}
-      />
-      {errors?.phone && <p>{errors.phone.message}</p>}
-      <textarea {...register("description")} placeholder="Комментарий" />
-      {
-        isLoading &&
-        <div className={styles.loading}>
-          <Spinner />
-        </div>
-      }
-      {isSuccess &&
-        <div className={styles.success}>
-          Успешно
-        </div>
-      }
-      {isError &&
-        <div className={styles.error}>
-          Ошибка
-        </div>
-      }
-     <input type="submit" value={'Отправить'} className={styles.submit} />
-
-    </form>
+      <form onSubmit={onSubmit} className={styles.form}>
+        <span>и мы свяжемся с вами в ближайшее время</span>
+        <input {...register('first_name')} placeholder="Имя" />
+        {errors?.first_name && <p>{errors.first_name.message}</p>}
+        <InputMask
+          mask="+7(999)999-99-99"
+          maskChar="_"
+          alwaysShowMask
+          {...register('phone')}
+        />
+        {errors?.phone && <p>{errors.phone.message}</p>}
+        <textarea {...register('description')} placeholder="Комментарий" />
+        {isLoading && (
+          <div className={styles.loading}>
+            <Spinner />
+          </div>
+        )}
+        {isSuccess && <div className={styles.success}>Успешно</div>}
+        {isError && <div className={styles.error}>Ошибка</div>}
+        <input type="submit" value={'Отправить'} className={styles.submit} />
+      </form>
     </>
   );
 }
