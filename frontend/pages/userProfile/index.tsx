@@ -1,11 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react';
 import MainUserProfile from './components/MainUserProfile';
+import { useAppSelector } from '../../redux/store';
+import EditUserInfo from './components/EditUserInfo';
 
 const userProfile = () => {
- 
-  return (
-    <MainUserProfile />
-  )
-}
+  const { user,userProfilePageStatus } = useAppSelector((state) => state.user);
 
-export default userProfile
+  return (
+    // personalInfo myCourses history certeficate
+    <>
+      {userProfilePageStatus == 'MainUserProfile' && (
+        <MainUserProfile />
+      )}
+      {userProfilePageStatus == 'personalInfo' && (
+        <EditUserInfo />
+      )}
+
+    </>
+  );
+};
+
+export default userProfile;

@@ -20,7 +20,10 @@ import LoginForm from '../../UniversalComponents/Forms/LoginForm/LoginForm';
 import { sent, resetSent } from '../../../redux/slices/sendFormConfirmation';
 import { RegistrationForm } from '../../UniversalComponents/Forms/registerationForm/RegistrationForm';
 import { loginApi2 } from '../../../redux/api/loginApi';
-import { userInit } from '../../../redux/slices/user/userSlice';
+import {
+  switchUserProfile,
+  userInit,
+} from '../../../redux/slices/user/userSlice';
 
 const Header = (): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -57,6 +60,9 @@ const Header = (): JSX.Element => {
       elem?.scrollIntoView({
         behavior: 'smooth',
       });
+    },
+    userProfilePage: () => {
+      dispatch(switchUserProfile('MainUserProfile'));
     },
   };
 
@@ -120,7 +126,10 @@ const Header = (): JSX.Element => {
             </Link>
           ) : (
             <Link href="/userProfile">
-              <div className={styles.login_wrapper}>
+              <div
+                className={styles.login_wrapper}
+                onClick={handler.userProfilePage}
+              >
                 <Image
                   src={profileIcon}
                   className={styles.login}

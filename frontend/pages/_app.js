@@ -16,27 +16,14 @@ function MyApp({ Component, pageProps }) {
   const isOpen = useAppSelector((state) => state.modal);
   const user = useAppSelector((state) => state.user.user);
 
-//   const [token, setToken] = useState(0);
-//   const dispatch = useAppDispatch();
-//   const [useEffectStopper, setUseEffectStopper] = useState(0);
-//   useEffect(() => {
-//     setToken(localStorage.getItem('token'));
 
-//     token.length > 5 &&
-//       token != 0 &&
-//       loginApi2.getInfoByToken(token).then((data) => dispatch(userInit(data)));
-
-//     token.length < 5 && setUseEffectStopper((prev) => prev++);
-//   }, [useEffectStopper]);
 
   return (
-    // <Provider store={store}>
       <Layout>
         {isOpen && <UniverseModal title="Оставьте заявку" />}
 
         <Component {...pageProps} />
       </Layout>
-    // </Provider>
   );
 }
 

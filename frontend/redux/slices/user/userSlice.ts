@@ -9,6 +9,7 @@ const initialState = {
     id: 0,
     token: '',
   },
+  userProfilePageStatus:'MainUserProfile'
 };
 
 export const user = createSlice({
@@ -18,9 +19,12 @@ export const user = createSlice({
     userInit: (state, action) => {
       state.user = action.payload;
     },
+    switchUserProfile:(state, action)=>{
+        state.userProfilePageStatus = action.payload
+    }
   },
 });
 
-export const { userInit } = user.actions;
+export const { userInit,switchUserProfile } = user.actions;
 
 export default user.reducer;
