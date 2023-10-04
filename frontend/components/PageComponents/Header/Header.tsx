@@ -9,52 +9,58 @@ import {
   callback,
   logotype,
   login,
+  profileIcon,
 } from './imports';
 import { useEffect, useState } from 'react';
 import { Button, Modal } from 'antd';
-import { useAppDispatch } from '../../../redux/store';
+import { useAppDispatch, useAppSelector } from '../../../redux/store';
 
 import { openModal } from '../../../redux/slices/modalSlice';
 import LoginForm from '../../UniversalComponents/Forms/LoginForm/LoginForm';
 import { sent, resetSent } from '../../../redux/slices/sendFormConfirmation';
 import { RegistrationForm } from '../../UniversalComponents/Forms/registerationForm/RegistrationForm';
+import { loginApi2 } from '../../../redux/api/loginApi';
+import { userInit } from '../../../redux/slices/user/userSlice';
 
-const Header = () => {
+const Header = (): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const user = useAppSelector((state) => state.user.user);
   const dispatch = useAppDispatch();
 
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    // first prevent the default behavior
-    e.preventDefault();
-    // get the href and remove everything before the hash (#)
-    const href = e.currentTarget.href;
-    const targetId = href.replace(/.*\#/, '');
-    // get the element by id and use scrollIntoView
-    const elem = document.getElementById(targetId);
-    elem?.scrollIntoView({
-      behavior: 'smooth',
-    });
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    token.length > 5 &&
+      token != '' &&
+      loginApi2.getInfoByToken(token).then((data) => dispatch(userInit(data)));
+  }, []);
+
+  const handler = {
+    contactUs: () => {
+      dispatch(openModal(true));
+      dispatch(resetSent(true));
+    },
+    ok: () => {
+      setIsModalOpen(false);
+    },
+    Cancel: () => {
+      setIsModalOpen(false);
+    },
+    showModal: () => {
+      setIsModalOpen(true);
+    },
+    scroll: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+      e.preventDefault();
+      const href = e.currentTarget.href;
+      const targetId = href.replace(/.*\#/, '');
+      const elem = document.getElementById(targetId);
+      elem?.scrollIntoView({
+        behavior: 'smooth',
+      });
+    },
   };
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleContactUs = () => {
-    dispatch(openModal(true));
-    dispatch(resetSent(true));
-  };
-  const [logRegToggler,setLogRegToggler] = useState(true)
-
+  const [logRegToggler, setLogRegToggler] = useState(true);
 
   return (
     <header className={styles.page_header}>
@@ -73,25 +79,25 @@ const Header = () => {
           </Link>
           <ul className="menu">
             <li>
-              <Link href="#about" onClick={handleScroll}>
+              <Link href="#about" onClick={handler.scroll}>
                 <Image src={aboutpng} alt="О нас" />
                 <span>О нас</span>
               </Link>
             </li>
             <li>
-              <Link href="#disciplines" onClick={handleScroll}>
+              <Link href="#disciplines" onClick={handler.scroll}>
                 <Image src={disc} alt="Дисциплины" />
                 <span> Дисциплины</span>
               </Link>
             </li>
             <li>
-              <Link href="#teachers" onClick={handleScroll}>
+              <Link href="#teachers" onClick={handler.scroll}>
                 <Image src={teachers} alt="Преподователи" />
                 <span>Преподаватели</span>
               </Link>
             </li>
             <li>
-              <Link href="#questions" onClick={handleScroll}>
+              <Link href="#questions" onClick={handler.scroll}>
                 <Image src={answers} alt="Ответы на вопросы" />
                 <span>Ответы на вопросы</span>
               </Link>
@@ -99,30 +105,44 @@ const Header = () => {
           </ul>
         </div>
         <div className={styles.feed_back}>
-          <div
-            onClick={handleContactUs}
-          >
+          <div onClick={handler.contactUs}>
             <button className={styles.text}>Обратный звонок</button>
             <button className={styles.phone}>
               <Image src={callback} alt="Обратный звонок" />
             </button>
           </div>
-          <Link href="#login">
-            <div className={styles.login_wrapper} onClick={() => showModal()}>
-              <Image src={login} className={styles.login} alt="Логин" />
-            </div>
-          </Link>
+
+          {user.phone.length < 5 ? (
+            <Link href="#login">
+              <div className={styles.login_wrapper} onClick={handler.showModal}>
+                <Image src={login} className={styles.login} alt="Логин" />
+              </div>
+            </Link>
+          ) : (
+            <Link href="/userProfile">
+              <div className={styles.login_wrapper}>
+                <Image
+                  src={profileIcon}
+                  className={styles.login}
+                  alt="user_Profile"
+                />
+              </div>
+            </Link>
+          )}
+
           <>
             <Modal
               title="Вход в личный кабинет"
               open={isModalOpen}
-              onOk={handleOk}
-              onCancel={handleCancel}
+              onOk={handler.ok}
+              onCancel={handler.Cancel}
               footer={null}
             >
-
-              {logRegToggler?<LoginForm setLogRegToggler={setLogRegToggler} />:
-              <RegistrationForm setLogRegToggler={setLogRegToggler} />}
+              {logRegToggler ? (
+                <LoginForm setLogRegToggler={setLogRegToggler} />
+              ) : (
+                <RegistrationForm setLogRegToggler={setLogRegToggler} />
+              )}
             </Modal>
           </>
         </div>

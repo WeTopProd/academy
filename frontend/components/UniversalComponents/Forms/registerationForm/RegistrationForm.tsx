@@ -37,11 +37,11 @@ export const RegistrationForm = ({ setLogRegToggler }) => {
     },
   };
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(closeModal(true))
+    dispatch(closeModal(true));
     const res = await regApi(
       firstName,
       lastName,
@@ -49,12 +49,13 @@ export const RegistrationForm = ({ setLogRegToggler }) => {
       password,
       rePassword,
       email
-    ).then(async()=>{
-        const logRes =await loginApi2.getUserByPhone(phone,password)
-        localStorage.setItem('token',logRes['auth_token'])
-    }).then(()=>dispatch(closeModal(true))).catch(err=>console.log(err.message) )
-    
-  
+    )
+      .then(async () => {
+        const logRes = await loginApi2.getUserByPhone(phone, password);
+        localStorage.setItem('token', logRes['auth_token']);
+      })
+      .then(() => dispatch(closeModal(true)))
+      .catch((err) => console.log(err.message));
   };
 
   return (

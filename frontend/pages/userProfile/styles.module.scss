@@ -1,0 +1,66 @@
+.mainWrapper {
+  font-family: 'Montserrat';
+
+  display: flex;
+  flex-direction: column;
+  gap: 10vh;
+  margin: 15vh 10vw;
+  h2 {
+    color: #a69249;
+    font-size: 16px;
+  }
+
+  .block1Wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5vh;
+    align-items: center;
+    width: 100%;
+  }
+
+  .block2Wrapper {
+    display: flex;
+    gap: 2vw;
+    justify-content: center;
+    width: 100%;
+
+    div {
+      width: 300px;
+      height: 150px;
+      border-radius: 30px;
+      border: 4px solid #a69249;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 32px;
+      flex-shrink: 0;
+    }
+    div:hover {
+      background: linear-gradient(180deg, #a69249 0%, #5b4b32 100%);
+      color: white;
+      border: 0;
+      flex-shrink: 0;
+    }
+  }
+  .block3Wrapper {
+    display: flex;
+    gap: 3vw;
+    justify-content: center;
+    width: 100%;
+    font-weight: 700;
+    align-items: center;
+
+    button {
+      border-radius: 50px;
+      background: linear-gradient(180deg, #a69249 0%, #5b4b32 100%);
+      color: white;
+      padding: 12px 30px;
+      border: 0;
+    }
+  }
+}

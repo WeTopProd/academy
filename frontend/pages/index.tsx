@@ -9,12 +9,16 @@ import Questions from '../components/PageComponents/Main/Questions/Questions';
 import FeedBack from '../components/PageComponents/Main/FeedBack/FeedBack';
 import store, { wrapper } from '../redux/store';
 import { GetServerSideProps, GetStaticProps } from 'next';
+import { Provider } from 'react-redux';
 
 
 
 const Index = ():JSX.Element => {
     return (
-        <>
+        <>   
+         <Provider store={store}>
+
+    
             <main className='mainPage'>
                 <Intro />
                 <About />
@@ -25,6 +29,7 @@ const Index = ():JSX.Element => {
                 <Gallery />
                 <FeedBack />
             </main>
+        </Provider>
         </>
     );
 };

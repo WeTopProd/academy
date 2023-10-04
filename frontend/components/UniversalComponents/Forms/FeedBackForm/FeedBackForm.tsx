@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import { useForm, Resolver } from 'react-hook-form';
 import styles from './styles.module.scss';
 import { useSendEmailMutation, mailApi2 } from '../../../../redux/api/mailApi';
-
 import InputMask from 'react-input-mask';
 import Spinner from '../../spinner/Spinner';
 import { useAppDispatch } from '../../../../redux/store';
-import { openModal, closeModal } from '../../../../redux/slices/modalSlice';
+import { closeModal } from '../../../../redux/slices/modalSlice';
 import { sent, resetSent } from '../../../../redux/slices/sendFormConfirmation';
 
-import FeedBackSent from './FeedBackSent';
-import { useEffect } from 'react';
 
 type FormValues = {
   first_name: string;
@@ -46,7 +43,7 @@ const phoneForBackend = async (phone: string) => {
 };
 
 export default function App() {
-  const [value, setValue] = useState('');
+  // const [value, setValue] = useState('');
   const {
     register,
     handleSubmit,
@@ -55,7 +52,7 @@ export default function App() {
   const [sendEmail, { isLoading, isSuccess, isError, status }] =
     useSendEmailMutation();
 
-  const [toggler, setToggler] = useState(true);
+  // const [toggler, setToggler] = useState(true);
   const dispatch = useAppDispatch();
 
   const onSubmit = handleSubmit(async (data: FormValues) => {

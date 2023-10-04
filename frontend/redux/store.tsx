@@ -15,10 +15,12 @@ import { mailApi } from './api/mailApi';
 import { loginApi } from './api/loginApi';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import sentRedSlice from './slices/sendFormConfirmation';
+import  user from './slices/user/userSlice';
 
 const makeStore = () =>
   configureStore({
     reducer: {
+      user: user,
       teacher: teacherSlice,
       teacherLarge: LargeTeacherSlice,
       disciplines: disciplinesSlice,

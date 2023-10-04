@@ -90,6 +90,17 @@ export const loginApi2 = {
       throw err;
     }
   },
+
+  getInfoByToken: async (token) => {
+    const res = await axios.get(`${apiUrl}users/me/`, {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Token ${token}`,
+      },
+    });
+    
+    return await res.data
+  },
 };
 // fName lName Telephone Password rePassword Email
 
@@ -117,10 +128,8 @@ export const regApi = async (
       },
     }
   );
- 
-  return res.data
 
-
+  return res.data;
 };
 
 // Export hooks for usage in functional components, which are

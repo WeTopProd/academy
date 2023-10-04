@@ -8,6 +8,7 @@ import answers from '../../../public/imgs/Header/answers.png';
 import logotype from '../../../public/imgs/Header/logotype.png'
 // import logotype  from '../../../public/imgs/Header/logotype.png'
 import callback from '../../../public/imgs/Header/callback.png';
+import profileIcon from '../../../public/imgs/icons/profileIcon.png'
 
 
-export {styles, aboutpng, disc, teachers, answers, callback, logotype,login }
+export {styles, aboutpng, disc, teachers, answers, callback, logotype,login,profileIcon }
