@@ -37,7 +37,11 @@ const Header = (): JSX.Element => {
       token != '' &&
       loginApi2
         .getInfoByToken(token)
-        .then((data) => dispatch(userInit({ ...data, token })));
+        .then((data) => {
+          console.log(data);
+          
+          dispatch(userInit({ ...data, token, date_of_birth: data.date_of_birth || null }))
+      });
   }, []);
 
   const handler = {

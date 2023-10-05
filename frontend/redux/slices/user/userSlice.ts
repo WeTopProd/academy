@@ -8,6 +8,7 @@ const initialState = {
     email: '',
     id: 0,
     token: '',
+    date_of_birth:null
   },
   userProfilePageStatus:'MainUserProfile'
 };
@@ -17,11 +18,13 @@ export const user = createSlice({
   initialState,
   reducers: {
     userInit: (state, action) => {
+        console.log(action.payload);
+        
       state.user = action.payload;
+
     },
     userEdit:(state,action)=>{
-        console.log(state.user,'11111111111111111111111111111');
-        console.log(action.payload,'2222222222222222222222222222');
+    
 
         state.user = action.payload
     },

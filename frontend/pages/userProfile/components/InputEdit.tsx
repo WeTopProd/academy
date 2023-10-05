@@ -17,7 +17,11 @@ const InputEdit = ({ title, value, handler }) => {
           onChange={handler}
         />
         </div>
-      ) : (
+      ) :(title == 'Дата рождения')? <div className={styles.inputDiv}>
+      <span>{title}</span>
+      <input value={value} placeholder={title} onChange={handler} type='date' />
+        </div>
+       :(
         <div className={styles.inputDiv}>
           <span>{title}</span>
           <input value={value} placeholder={title} onChange={handler} />

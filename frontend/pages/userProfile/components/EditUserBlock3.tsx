@@ -14,6 +14,7 @@ const EditUserBlock3 = () => {
   const [first_name, setFirst_name] = useState(user.first_name);
   const [last_name, setLast_name] = useState(user.last_name);
   const [phone, setPhone] = useState(user.phone);
+  const [date_of_birth, setDate_of_birth] = useState(user.date_of_birth);
 
   const handler = {
     first_name: (e) => {
@@ -24,7 +25,12 @@ const EditUserBlock3 = () => {
     },
 
     phone: (e) => {
-      setPhone(e.target.value);
+      setPhone(phoneForBackend(e.target.value));
+      console.log(phone);
+    },
+    date_of_birth: (e) => {
+      setDate_of_birth(e.target.value);
+      console.log(e.target.value);
     },
   };
 
@@ -35,11 +41,15 @@ const EditUserBlock3 = () => {
       last_name,
       email: user.email,
       phone: `${phone}`,
+      date_of_birth: date_of_birth,
     };
 
-    userApi
-      .editUser(user.token, newUserData)
-      .then((data) => dispatch(userEdit(data)));
+    first_name &&
+      last_name &&
+      phone.length == 12 &&
+      userApi
+        .editUser(user.token, newUserData)
+        .then((data) => dispatch(userEdit(data)));
   };
 
   return (
@@ -61,7 +71,13 @@ const EditUserBlock3 = () => {
           value={last_name}
           handler={handler.last_name}
         />
-        <InputEdit title={'Телефо'} value={phone} handler={handler.phone} />
+        <InputEdit title={'Телефон'} value={phone} handler={handler.phone} />
+        <InputEdit
+          title={'Дата рождения'}
+          value={date_of_birth}
+          handler={handler.date_of_birth}
+        />
+
         <button onClick={onSubmit}>submit</button>
       </div>
     </div>

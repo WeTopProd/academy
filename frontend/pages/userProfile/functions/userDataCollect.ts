@@ -1,9 +1,8 @@
-export const phoneForBackend = async(phone: string) => {
-  var newPhone;
+export const phoneForBackend = (phone: string) => {
   ['(', ')', '-', '-'].map((item) => {
-    newPhone = phone.replace(item, '');
+     phone = phone.replace(item, '');
   });
-  console.log(phone);
+  // console.log(phone);
 
-  return newPhone;
+  return phone;
 };
