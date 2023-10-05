@@ -7,7 +7,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 from .managers import UserManager
 from .validators import validate_phone_number
 
-
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         db_index=True,
@@ -35,6 +34,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         max_length=255,
         verbose_name='Фамилия'
     )
+    date_of_birth = models.DateField(
+        null=True,
+        blank=True,
+        verbose_name='Дата рождения'
+    )
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
@@ -42,7 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['phone', 'first_name', 'last_name']
+    REQUIRED_FIELDS = ['phone', 'first_name', 'last_name', 'date_of_birth']
 
     class Meta:
         verbose_name = 'Пользователь'
