@@ -183,6 +183,8 @@ DJOSER = {
 }
 
 PHONENUMBER_DEFAULT_REGION = 'RU'
+DATETIME_FORMAT = 'd.m.Y H:i:s'
+DATE_FORMAT = 'd.m.Y'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'server61.hosting.reg.ru'
