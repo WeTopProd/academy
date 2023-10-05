@@ -55,9 +55,17 @@ const EditUserBlock3 = () => {
   return (
     <div className={styles.block3wrapper}>
       <div className={styles.innerBlock1}>
-        <h1>О себе</h1>
-        <span>
-          Вносите реальные данные, потому что они будут отображены в сертификате
+        {/* <h1></h1> */}
+        <span style={{ marginTop: '25%' }}>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          Вносите реальные данные, <br />
+          потому что они будут отображены <br />в сертификате
         </span>
       </div>
       <div className={styles.innerBlock2}>

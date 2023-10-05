@@ -39,8 +39,8 @@ const Header = (): JSX.Element => {
         .getInfoByToken(token)
         .then((data) => {
           console.log(data);
-          
-          dispatch(userInit({ ...data, token, date_of_birth: data.date_of_birth || null }))
+          // date_of_birth: data.date_of_birth || null 
+          dispatch(userInit({ ...data, token, }))
       });
   }, []);
 

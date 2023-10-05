@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import InputMask from 'react-input-mask';
 import * as Api from '../../../../redux/api/loginApi';
 import { useEffect } from 'react';
+import { phoneForBackend } from '../../../../pages/userProfile/functions/userDataCollect';
 
 // type FormValuesEmail = {
 //   email: string;
@@ -112,7 +113,7 @@ export default function LoginForm({ setLogRegToggler }) {
               maskChar="_"
               placeholder="Номер"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => setPhone(phoneForBackend(e.target.value))}
             />
             <input
               value={password}

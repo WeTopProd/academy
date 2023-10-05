@@ -1,5 +1,5 @@
 export const phoneForBackend = (phone: string) => {
-  ['(', ')', '-', '-'].map((item) => {
+  ['(', ')', '-', '-', ' '].map((item) => {
      phone = phone.replace(item, '');
   });
   // console.log(phone);
