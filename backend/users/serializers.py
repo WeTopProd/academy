@@ -19,6 +19,8 @@ class UserCreateSerializer(UserCreateSerializer):
             'last_name',
             'phone',
             'date_of_birth',
+            'photo',
+            'user_type',
             'password',
             're_password'
         )
@@ -38,6 +40,8 @@ class UserSerializer(UserSerializer):
             'first_name',
             'last_name',
             'date_of_birth',
+            'photo',
+            'user_type',
             'phone'
         )
 

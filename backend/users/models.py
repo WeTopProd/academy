@@ -7,7 +7,12 @@ from phonenumber_field.modelfields import PhoneNumberField
 from .managers import UserManager
 from .validators import validate_phone_number
 
+
 class User(AbstractBaseUser, PermissionsMixin):
+    USER_TYPES = (
+        ('student', 'Ученик'),
+        ('teacher', 'Преподаватель'),
+    )
     email = models.EmailField(
         db_index=True,
         max_length=255,
@@ -39,6 +44,19 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True,
         verbose_name='Дата рождения'
     )
+    photo = models.ImageField(
+        upload_to='backend_media/',
+        verbose_name='Фото пользователя',
+        blank=True,
+        null=True
+    )
+    user_type = models.CharField(
+        verbose_name='Тип пользователя',
+        max_length=50,
+        choices=USER_TYPES,
+        blank=True,
+        null=True,
+    )
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
@@ -46,7 +64,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['phone', 'first_name', 'last_name', 'date_of_birth']
+    REQUIRED_FIELDS = ['phone', 'first_name', 'last_name', 'date_of_birth',
+                       'user_type', 'photo']
 
     class Meta:
         verbose_name = 'Пользователь'
