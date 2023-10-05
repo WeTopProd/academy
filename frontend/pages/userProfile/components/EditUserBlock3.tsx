@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import styles from '../styles.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { switchUserProfile } from '../../../redux/slices/user/userSlice';
+import { phoneForBackend } from '../functions/userDataCollect';
 import InputEdit from './InputEdit';
+import { userEdit } from '../../../redux/slices/user/userSlice';
+import { userApi } from '../../../redux/api/userApi';
 
 const EditUserBlock3 = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -19,9 +22,24 @@ const EditUserBlock3 = () => {
     last_name: (e) => {
       setLast_name(e.target.value);
     },
+
     phone: (e) => {
       setPhone(e.target.value);
     },
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const newUserData = {
+      first_name,
+      last_name,
+      email: user.email,
+      phone: `${phone}`,
+    };
+
+    userApi
+      .editUser(user.token, newUserData)
+      .then((data) => dispatch(userEdit(data)));
   };
 
   return (
@@ -33,10 +51,18 @@ const EditUserBlock3 = () => {
         </span>
       </div>
       <div className={styles.innerBlock2}>
-        <InputEdit title={'Имя'} value={first_name} handler={handler.first_name}/>
-        <InputEdit title={'Фамилия'} value={last_name} handler={handler.last_name}/>
-        <InputEdit title={'Телефон'} value={phone} handler={handler.phone}/>
-
+        <InputEdit
+          title={'Имя'}
+          value={first_name}
+          handler={handler.first_name}
+        />
+        <InputEdit
+          title={'Фамилия'}
+          value={last_name}
+          handler={handler.last_name}
+        />
+        <InputEdit title={'Телефо'} value={phone} handler={handler.phone} />
+        <button onClick={onSubmit}>submit</button>
       </div>
     </div>
   );

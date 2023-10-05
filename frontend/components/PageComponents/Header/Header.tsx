@@ -35,7 +35,9 @@ const Header = (): JSX.Element => {
 
     token.length > 5 &&
       token != '' &&
-      loginApi2.getInfoByToken(token).then((data) => dispatch(userInit(data)));
+      loginApi2
+        .getInfoByToken(token)
+        .then((data) => dispatch(userInit({ ...data, token })));
   }, []);
 
   const handler = {
@@ -118,7 +120,7 @@ const Header = (): JSX.Element => {
             </button>
           </div>
 
-          {user.phone.length < 5 ? (
+          {user.phone?.length < 5 ? (
             <Link href="#login">
               <div className={styles.login_wrapper} onClick={handler.showModal}>
                 <Image src={login} className={styles.login} alt="Логин" />

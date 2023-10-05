@@ -19,12 +19,22 @@ export const user = createSlice({
     userInit: (state, action) => {
       state.user = action.payload;
     },
+    userEdit:(state,action)=>{
+        console.log(state.user,'11111111111111111111111111111');
+        console.log(action.payload,'2222222222222222222222222222');
+
+        state.user = action.payload
+    },
+
+
+    // RENDER CONTROL 
+    // User Profile Page
     switchUserProfile:(state, action)=>{
         state.userProfilePageStatus = action.payload
     }
   },
 });
 
-export const { userInit,switchUserProfile } = user.actions;
+export const { userInit,userEdit,switchUserProfile } = user.actions;
 
 export default user.reducer;
