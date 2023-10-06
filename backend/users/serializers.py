@@ -8,6 +8,7 @@ class UserCreateSerializer(UserCreateSerializer):
     date_of_birth = serializers.DateField(
         format='%d.%m.%Y', input_formats=['%d.%m.%Y']
     )
+    photo = serializers.ImageField(max_length=None, use_url=True)
 
     def validate_phone(self, value):
         return value.replace('8', '+7', 1)
@@ -21,6 +22,7 @@ class UserCreateSerializer(UserCreateSerializer):
             'date_of_birth',
             'photo',
             'user_type',
+            'discipline',
             'password',
             're_password'
         )
@@ -31,6 +33,7 @@ class UserSerializer(UserSerializer):
     date_of_birth = serializers.DateField(
         format='%d.%m.%Y', input_formats=['%d.%m.%Y']
     )
+    photo = serializers.ImageField(max_length=None, use_url=True)
 
     class Meta(UserSerializer.Meta):
         ref_name = 'CustomUserSerializer'
@@ -42,6 +45,7 @@ class UserSerializer(UserSerializer):
             'date_of_birth',
             'photo',
             'user_type',
+            'discipline',
             'phone'
         )
 

@@ -4,6 +4,8 @@ from django.core.validators import validate_email
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
+from disciplines.models import Discipline
+
 from .managers import UserManager
 from .validators import validate_phone_number
 
@@ -57,6 +59,14 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True,
         null=True,
     )
+    discipline = models.ForeignKey(
+        Discipline,
+        on_delete=models.CASCADE,
+        related_name='users',
+        verbose_name='Запись на дисциплину',
+        blank=True,
+        null=True
+    )
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
@@ -65,7 +75,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['phone', 'first_name', 'last_name', 'date_of_birth',
-                       'user_type', 'photo']
+                       'photo', 'user_type']
 
     class Meta:
         verbose_name = 'Пользователь'

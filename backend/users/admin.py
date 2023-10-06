@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import User
 
 
+@admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = (
         'pk',
@@ -15,6 +16,3 @@ class UserAdmin(admin.ModelAdmin):
     ordering = ('email', )
     search_fields = ('email', 'phone', 'last_name')
     list_filter = ('email', 'first_name', 'last_name', 'phone')
-
-
-admin.site.register(User, UserAdmin)
