@@ -1,11 +1,24 @@
 import React from 'react';
 import styles from '../styles.module.scss';
-import { useAppSelector } from '../../../redux/store';
+import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import userPhoto from '../../../public/imgs/icons/userPhoto.png';
 import Image from 'next/image';
+import Router from 'next/router';
+
+import { userApi } from '../../../redux/api/userApi';
+import { userLogOut } from '../../../redux/slices/user/userSlice';
 
 const UserInfo_Logout = () => {
   const { user } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch()
+  const logOut = async () => {
+
+    userApi.userLogOut(user.token).then((data)=>{
+      localStorage.setItem('token', '');
+      dispatch(userLogOut(data))
+      Router.push('/')
+    })
+  };
 
   return (
     <div className={styles.block2wrapper}>
@@ -17,7 +30,7 @@ const UserInfo_Logout = () => {
           {user.first_name} {user.last_name}
         </h1>
         <h2>{user.email}</h2>
-        <div className={styles.logOut}>
+        <div className={styles.logOut} onClick={logOut}>
           <a>
             <svg
               width="91"

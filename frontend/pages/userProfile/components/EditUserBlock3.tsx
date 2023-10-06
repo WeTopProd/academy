@@ -15,6 +15,7 @@ const EditUserBlock3 = () => {
   const [last_name, setLast_name] = useState(user.last_name);
   const [phone, setPhone] = useState(user.phone);
   const [date_of_birth, setDate_of_birth] = useState(user.date_of_birth);
+  const [photo, setPhoto] = useState(null);
 
   const handler = {
     first_name: (e) => {
@@ -32,16 +33,28 @@ const EditUserBlock3 = () => {
       setDate_of_birth(e.target.value);
       console.log(e.target.value);
     },
+    setPhoto: (e) => {
+      const photoData = new FormData();
+      photoData.append('photo', e.target.files);
+      return photoData;
+    },
+    photo: (e) => {
+      setPhoto(handler.setPhoto(e));
+      console.log(photo, '-----------------');
+    },
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
+
     const newUserData = {
       first_name,
       last_name,
       email: user.email,
       phone: `${phone}`,
       date_of_birth: date_of_birth,
+      // photo: photo,
+      user_type: user.user_type,
     };
 
     first_name &&
@@ -50,12 +63,18 @@ const EditUserBlock3 = () => {
       userApi
         .editUser(user.token, newUserData)
         .then((data) => dispatch(userEdit(data)));
+    console.log(photo, '----------------');
+
+    // userApi
+    // .editUserPhoto(user.token, { ...photo })
+    // .then((data) => console.log(data))
+    // .catch((err) => console.log(err));
+    // console.log(newUserData,'----------------');
   };
 
   return (
     <div className={styles.block3wrapper}>
       <div className={styles.innerBlock1}>
-        {/* <h1></h1> */}
         <span style={{ marginTop: '25%' }}>
           <br />
           <br />
@@ -86,7 +105,7 @@ const EditUserBlock3 = () => {
           handler={handler.date_of_birth}
         />
 
-        <button onClick={onSubmit}>submit</button>
+        <button className={styles.submitButtun} onClick={onSubmit}>Сохранить</button>
       </div>
     </div>
   );

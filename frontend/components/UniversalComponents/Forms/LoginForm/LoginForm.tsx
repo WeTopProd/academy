@@ -45,12 +45,14 @@ export default function LoginForm({ setLogRegToggler }) {
           .getUserByPhone(phone, password)
           .then((data) => {
             localStorage.setItem('token', data['auth_token']);
+            window.location.reload()
           })
           .catch((err) => console.log(err))
       : Api.loginApi2
           .getUserByEmail(email, password)
           .then((data) => {
             localStorage.setItem('token', data['auth_token']);
+            window.location.reload()
           })
           .catch((err) => console.log(err));
   };
