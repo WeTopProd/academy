@@ -8,8 +8,11 @@ const initialState = {
     email: '',
     id: 0,
     token: '',
+    date_of_birth: null,
+    photo: null,
+    user_type: null,
   },
-  userProfilePageStatus:'MainUserProfile'
+  userProfilePageStatus: 'MainUserProfile',
 };
 
 export const user = createSlice({
@@ -19,12 +22,21 @@ export const user = createSlice({
     userInit: (state, action) => {
       state.user = action.payload;
     },
-    switchUserProfile:(state, action)=>{
-        state.userProfilePageStatus = action.payload
-    }
+    userEdit: (state, action) => {
+      state.user = action.payload;
+    },
+    userLogOut: (state, action) => {
+      state.user = initialState.user;
+    },
+
+    // RENDER CONTROL
+    // User Profile Page
+    switchUserProfile: (state, action) => {
+      state.userProfilePageStatus = action.payload;
+    },
   },
 });
 
-export const { userInit,switchUserProfile } = user.actions;
+export const { userInit, userEdit,userLogOut, switchUserProfile } = user.actions;
 
 export default user.reducer;

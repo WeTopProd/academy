@@ -36,19 +36,22 @@ const Disciplines = () => {
             <h1 className={styles.h1}>Наши дисциплины</h1>
             <h1 className={styles.mobileL}>Дисциплины</h1>
             <div className={styles.disciplines_wrapper} ref={seeMore}>
-                {disciplines.map(item => {
+                {disciplines.map((item,i) => {
                     return item.ImageURLResize ?
                         <LargeCard
                             IMG_SRC={item.ImageURL + item.ImageType}
                             text={item.name}
                             resize={item.ImageURL + item.ImageURLResize + item.ImageType}
                             id={item.id}
+                            key={i}
                         />
                         :
                         <SmallCard
                             IMG_SRC={item.ImageURL + item.ImageType}
                             text={item.name}
                             id={item.id}
+                            key={i}
+
                         />
                 })}
                 {/* <SmallCard IMG_SRC={web_designer} text={'веб-дизайнер'}/>

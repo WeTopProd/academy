@@ -4,8 +4,10 @@ import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { switchUserProfile } from '../../../redux/slices/user/userSlice';
 import userPhoto from '../../../public/imgs/icons/userPhoto.png';
 import Image from 'next/image';
+
 import UserInfo_Logout from './UserInfo_Logout';
 import EditUserBlock3 from './EditUserBlock3';
+import EditUserBlock4 from './EditUserBlock4';
 
 const EditUserInfo = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -20,6 +22,9 @@ const EditUserInfo = () => {
       <UserInfo_Logout />
 
       <EditUserBlock3 />
+      <EditUserBlock4 />
+
+
     </div>
   );
 };

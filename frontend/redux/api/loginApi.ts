@@ -59,6 +59,8 @@ const apiUrl = 'http://127.0.0.1:8000/api/';
 export const loginApi2 = {
   getUserByEmail: async (email, password) => {
     try {
+      console.log(email, password);
+      
       const res = await axios.post(`${apiUrl}auth/token-email/`, {
         email: email,
         password: password,
@@ -72,6 +74,8 @@ export const loginApi2 = {
 
   getUserByPhone: async (phone, password) => {
     try {
+      console.log(phone, password);
+
       const res = await axios.post(
         `${apiUrl}auth/token-phone/`,
         {
