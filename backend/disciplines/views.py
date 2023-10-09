@@ -2,9 +2,15 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 
 from .filters import RegistrationFilter
-from .models import RegistrationToDiscipline
+from .models import Discipline, RegistrationToDiscipline
 from .permissions import IsOwnerOrReadOnly
-from .serializers import RegistrationToDisciplineSerializer
+from .serializers import (DisciplineSerializer,
+                          RegistrationToDisciplineSerializer)
+
+
+class DisciplineViewSet(viewsets.ModelViewSet):
+    queryset = Discipline.objects.all()
+    serializer_class = DisciplineSerializer
 
 
 class RegistrationViewSet(viewsets.ModelViewSet):

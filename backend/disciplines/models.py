@@ -4,10 +4,79 @@ from phonenumber_field.modelfields import PhoneNumberField
 from users.validators import validate_phone_number
 
 
+class Skill(models.Model):
+    name = models.CharField(
+        max_length=255,
+        verbose_name='Название навыка'
+    )
+
+    class Meta:
+        verbose_name = 'Навык'
+        verbose_name_plural = 'Навыки'
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+
+class CostType(models.Model):
+    name = models.CharField(
+        max_length=255,
+        verbose_name='Тип стоимости'
+    )
+
+    class Meta:
+        verbose_name = 'Тип стоимости'
+        verbose_name_plural = 'Типы стоимостей'
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+
+class Cost(models.Model):
+    name = models.CharField(
+        max_length=255,
+        verbose_name='Название'
+    )
+    price = models.CharField(
+        max_length=35,
+        verbose_name='Цена'
+    )
+    type = models.ForeignKey(
+        CostType,
+        on_delete=models.CASCADE,
+        verbose_name='Тип стоимости'
+    )
+
+    class Meta:
+        verbose_name = 'Стоимость'
+        verbose_name_plural = 'Стоимости'
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+
 class Discipline(models.Model):
     name = models.CharField(
         max_length=255,
         verbose_name='Название дисциплины'
+    )
+    description = models.TextField(verbose_name='Описание дисциплины')
+    lesson_duration = models.CharField(
+        max_length=35,
+        verbose_name='Продолжительность урока'
+    )
+    skills = models.ManyToManyField(Skill, verbose_name='Навык')
+    cost = models.ManyToManyField(
+        'Cost',
+        related_name='disciplines',
+        verbose_name='Тип стоимости'
+    )
+    recommended_lesson_count = models.IntegerField(
+        default=30,
+        verbose_name='Рекомендуемое кол-во уроков'
     )
 
     class Meta:
@@ -29,6 +98,7 @@ class TypeLesson(models.Model):
         verbose_name = 'Вид занятий'
         verbose_name_plural = 'Виды занятий'
         ordering = ['name']
+
 
     def __str__(self):
         return self.name
