@@ -1,24 +1,29 @@
 from django.contrib import admin
 
-from .models import (AdditionalPerson, CountLesson, Discipline,
-                     RegistrationToDiscipline, TypeLesson, Skill, Cost, CostType)
+from .models import (AdditionalPerson, Cost, CostType, CountLesson, Discipline,
+                     RegistrationToDiscipline, Skill, TypeLesson)
+
 
 @admin.register(CostType)
 class CostAdmin(admin.ModelAdmin):
     list_display = (
         'name',
     )
+
+
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
     list_display = (
         'name',
     )
 
+
 @admin.register(Cost)
 class CostAdmin(admin.ModelAdmin):
     list_display = (
         'name',
     )
+
 
 @admin.register(AdditionalPerson)
 class AdditionalPersonAdmin(admin.ModelAdmin):

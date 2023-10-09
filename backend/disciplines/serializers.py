@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from .models import (CountLesson, Discipline, RegistrationToDiscipline,
-                     TypeLesson, Cost, Skill)
+from .models import (Cost, CountLesson, Discipline, RegistrationToDiscipline,
+                     Skill, TypeLesson)
 
 
 class SkillSerializer(serializers.ModelSerializer):
@@ -29,6 +29,8 @@ class DisciplineSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'name',
+            'name_sklonenie',
+            'image_url',
             'description',
             'lesson_duration',
             'skills',
