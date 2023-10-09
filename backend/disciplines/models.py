@@ -63,7 +63,11 @@ class Discipline(models.Model):
         max_length=255,
         verbose_name='Название дисциплины'
     )
-    name_sklonenie = models.CharField(max_length=255, blank=True)
+    name_sklonenie = models.CharField(
+        max_length=255,
+        blank=True,
+        verbose_name='Склонение имени'
+    )
     image_url = models.ImageField(
         upload_to='backend_media/',
         verbose_name='Изображение'
@@ -188,13 +192,9 @@ class RegistrationToDiscipline(models.Model):
         null=True,
         blank=True
     )
-    date = models.CharField(
-        max_length=255,
-        verbose_name='Дата занятий'
-    )
-    time = models.CharField(
-        max_length=255,
-        verbose_name='Время занятий'
+    lesson_dates = models.JSONField(
+        verbose_name='Даты и время занятий',
+        default=list,
     )
     start_lessons = models.CharField(
         max_length=255,

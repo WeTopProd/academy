@@ -67,8 +67,7 @@ class RegistrationAdmin(admin.ModelAdmin):
         'type_lessons',
         'count_lessons',
         'count_people',
-        'date',
-        'time',
+        'lesson_dates',
         'start_lessons',
         'type_payment'
     )

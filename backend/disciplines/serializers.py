@@ -56,11 +56,17 @@ class CountLessonSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class LessonDateSerializer(serializers.Serializer):
+    date = serializers.DateField()
+    time = serializers.CharField()
+
+
 class RegistrationToDisciplineSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(
         default=serializers.CurrentUserDefault(),
         read_only=True
     )
+    lesson_dates = LessonDateSerializer(many=True)
 
     class Meta:
         model = RegistrationToDiscipline
