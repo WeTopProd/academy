@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import './modal.css';
 import { userInit } from '../redux/slices/user/userSlice';
 import { loginApi2 } from '../redux/api/loginApi';
+import './disciplines/components/callendarStyle.css'
 
 function MyApp({ Component, pageProps }) {
   const isOpen = useAppSelector((state) => state.modal);

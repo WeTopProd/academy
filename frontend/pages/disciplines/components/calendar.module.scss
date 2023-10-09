@@ -1,0 +1,20 @@
+.gold-circle {
+  position: relative;
+
+  input:checked + .rmdp-calendar .rmdp-day,
+  input:checked + .rmdp-calendar .rmdp-day:hover {
+    outline: none;
+  }
+
+  input:checked + .rmdp-calendar .rmdp-day::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px; /* Adjust the size of the circle as needed */
+    height: 20px;
+    border-radius: 50%;
+    background-color: gold;
+  }
+}

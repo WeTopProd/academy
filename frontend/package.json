@@ -1,6 +1,5 @@
 {
   "name": "academynestjs",
-  
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -31,6 +30,8 @@
     "react-input-mask": "^2.0.4",
     "react-jsx-parser": "^1.29.0",
     "react-modal": "^3.16.1",
+    "react-multi-date-picker": "^4.3.3",
+    "react-multiple-datepicker": "^0.1.0",
     "react-phone-input-2": "^2.15.1",
     "react-player": "^2.12.0",
     "react-redux": "^8.0.5",
