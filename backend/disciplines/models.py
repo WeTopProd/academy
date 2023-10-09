@@ -63,6 +63,11 @@ class Discipline(models.Model):
         max_length=255,
         verbose_name='Название дисциплины'
     )
+    name_sklonenie = models.CharField(max_length=255, blank=True)
+    image_url = models.ImageField(
+        upload_to='backend_media/',
+        verbose_name='Изображение'
+    )
     description = models.TextField(verbose_name='Описание дисциплины')
     lesson_duration = models.CharField(
         max_length=35,
@@ -98,7 +103,6 @@ class TypeLesson(models.Model):
         verbose_name = 'Вид занятий'
         verbose_name_plural = 'Виды занятий'
         ordering = ['name']
-
 
     def __str__(self):
         return self.name
