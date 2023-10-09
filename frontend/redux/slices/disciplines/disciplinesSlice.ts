@@ -12,6 +12,7 @@ export const disciplines = createSlice({
     // getOneTeacher:(state, action) => {
     //     return state.filter((el)=>el.id == action)
     // }
+    
   },
 });
 

@@ -7,7 +7,7 @@ import Router from 'next/router';
 const userProfile = () => {
   const { user, userProfilePageStatus } = useAppSelector((state) => state.user);
   useEffect(() => {
-    localStorage.getItem('token')?.length < 5 && Router.push('/');
+    localStorage?.getItem('token')?.length < 5 && Router.push('/');
   }, []);
   return (
     // personalInfo myCourses history certeficate

@@ -54,18 +54,7 @@ const Disciplines = () => {
 
                         />
                 })}
-                {/* <SmallCard IMG_SRC={web_designer} text={'веб-дизайнер'}/>
-                    <SmallCard IMG_SRC={vedushii} text={'ведущий'}/>
-                    <LargeCard IMG_SRC={web_programmist} text={'веб-разработчик'} resize = {web_programmist_square}/>
-                    <LargeCard IMG_SRC={pantomima} text={'пантомима'} resize = {pantomima_square}/>
-                    <SmallCard IMG_SRC={step} text={'ведущий'}/>
-                    <SmallCard IMG_SRC={vokal} text={'вокал'} />
-                    <SmallCard IMG_SRC={bloger} text={'блогер'} />
-                    <SmallCard IMG_SRC={clown} text={'клоунада'} />
-                    <LargeCard IMG_SRC={actor} text={'актерская игра'}  resize = {actor_square}/>
-                    <LargeCard IMG_SRC={billiard} text={'бильярд'} resize = {billiard_square}/>
-                    <SmallCard IMG_SRC={barmen} text={'бармен'}/>
-                    <SmallCard IMG_SRC={standup} text={'стендап'} /> */}
+                
             </div>
             <div className={styles.see_more} onClick={() => handleClick()}>
                 <span>Смотреть еще</span>

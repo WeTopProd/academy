@@ -52,3 +52,7 @@ export interface DisciplinesType {
 export type DisciplineId = {
   id?: DisciplinesType['id'];
 };
+
+export type DisciplineChooseControl = {
+  DSC_id: DisciplineId | false;
+};
