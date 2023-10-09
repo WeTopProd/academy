@@ -769,6 +769,7 @@
     width: 100%;
     align-items: center;
     justify-content: center;
+    margin: 75px 0;
     .centerLine {
       position: absolute;
       width: 70%;
@@ -778,6 +779,9 @@
     }
     div {
       z-index: 1;
+      span {
+        font-weight: 700;
+      }
     }
     .stepActive {
       width: 100px;
@@ -800,6 +804,53 @@
       align-items: center;
       justify-content: center;
       color: black;
+    }
+  }
+  .block3 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    .innerBloc3Wrapper {
+      width: 100%;
+      flex-grow: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .nextBtnDiv {
+      width: 50%;
+      button {
+        display: inline-flex;
+        padding: 12px 30px;
+        align-items: flex-start;
+        gap: 41px;
+        border: 0;
+        color: #fff;
+
+        border-radius: 50px;
+        background: linear-gradient(180deg, #a69249 0%, #5b4b32 100%);
+      }
+    }
+    .Block3Inputs {
+      display: flex;
+      width: 100%;
+
+      justify-content: space-around;
+
+      span {
+        width: 200px;
+      }
+
+      .input {
+        width: 300px;
+        height: 35px;
+        border-radius: 60px;
+        background: #fff;
+        border: 0;
+        padding: 3px 10px;
+      }
     }
   }
 }

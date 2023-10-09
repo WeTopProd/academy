@@ -53,6 +53,20 @@ export type DisciplineId = {
   id?: DisciplinesType['id'];
 };
 
+export type ChosenDiscipline = {
+  count_people: number;
+  date: string;
+  time: string;
+  start_lessons: string;
+  type_payment: string;
+  discipline: number | false;
+  type_lessons: number;
+  count_lessons: number;
+  additional_person: number;
+};
+
 export type DisciplineChooseControl = {
   DSC_id: DisciplineId | false;
+  step: number;
+  chosen: ChosenDiscipline;
 };

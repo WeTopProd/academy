@@ -1,9 +1,27 @@
 import React from 'react';
-import { useAppSelector } from '../../../redux/store';
+import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import styles from '../Disciplines.module.scss';
+import Block3Step1 from './Block3Step1';
+import { nextBtn } from '../../../redux/slices/disciplines/disciplineChooseControlSlice';
+import StepsTracker from './StepsTracker';
+import Block3Step2 from './Block3Step2';
 
 const Reg = ({ id }) => {
   const disciplines = useAppSelector((state) => state.disciplines);
+  const step = useAppSelector((state) => state.disciplineChooseControl.step);
+  const dispatch = useAppDispatch();
+
+  const { type_lessons, count_lessons, count_people } = useAppSelector(
+    (state) => state.disciplineChooseControl.chosen
+  );
+
+  const nextButtonOnClick = () => {
+    if (step < 3) {
+      dispatch(nextBtn(step + 1));
+    } else {
+      alert('working');
+    }
+  };
 
   return (
     <div className={styles.disciplines_reg_mainWrapper}>
@@ -12,29 +30,20 @@ const Reg = ({ id }) => {
         <h2>Выбор дисциплины</h2>
       </div>
       <div className={styles.block2}>
-        <div className={styles.stepActive}>
-          <span>1</span>
-        </div>
-        <div className={styles.stepNotActive}>
-        <span>2</span>
-        </div>
-        <div className={styles.stepNotActive}>
-        <span>3</span>
-        </div>
-        <div className={styles.centerLine}></div>
+        <StepsTracker />
       </div>
-      <div className="block3">
-        <div>
-          <span>Дисциплина</span>
-          <select name="disciplines">
-            {disciplines.map((el) => {
-              if (el.id == id) {
-                return <option selected>{el.name}</option>;
-              } else {
-                return <option>{el.name}</option>;
-              }
-            })}
-          </select>
+      <div className={styles.block3}>
+        <div className={styles.innerBloc3Wrapper}>
+          {step == 1 ? (
+            <Block3Step1 />
+          ) : step == 2 ? (
+            <Block3Step2 />
+          ) : (
+            <div>3</div>
+          )}
+        </div>
+        <div className={styles.nextBtnDiv}>
+          <button onClick={nextButtonOnClick}>Далее</button>
         </div>
       </div>
     </div>

@@ -21,7 +21,8 @@ const Disciplines: FC = () => {
 
   const teacher = useAppSelector((state) =>
     state.teacher.filter((item) => {
-      return item.disciplines.map((i) => i.name).includes(disciplines?.type);
+      return item.disciplines.map((i) => i.name)
+    //   .includes(disciplines?.type);
     })
   );
 
@@ -35,7 +36,7 @@ const Disciplines: FC = () => {
       <section className={styles.disciplines_title_container}>
         <div className={styles.disciplines_title}>
           <Image
-            src={disciplines.ImageURL + disciplines.ImageType}
+            src={disciplines.ImageURL + disciplines?.ImageType}
             width={700}
             height={400}
             alt="Фото"
