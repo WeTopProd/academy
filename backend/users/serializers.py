@@ -2,6 +2,8 @@ from djoser.serializers import UserCreateSerializer, UserSerializer
 from phonenumber_field.serializerfields import PhoneNumberField
 from rest_framework import serializers
 
+from .models import Schedule, ScheduleInfo
+
 
 class UserCreateSerializer(UserCreateSerializer):
     phone = PhoneNumberField()
@@ -23,6 +25,7 @@ class UserCreateSerializer(UserCreateSerializer):
             'photo',
             'user_type',
             'discipline',
+            'schedule',
             'password',
             're_password'
         )
@@ -46,6 +49,7 @@ class UserSerializer(UserSerializer):
             'photo',
             'user_type',
             'discipline',
+            'schedule',
             'phone'
         )
 
@@ -61,3 +65,24 @@ class PhoneNumberSerializerField(PhoneNumberField):
             raise serializers.ValidationError({'phone': e.detail[0]})
 
         return parsed_data
+
+
+class ScheduleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Schedule
+        fields = (
+            'id',
+            'teacher',
+            'discipline',
+            'schedule_info'
+        )
+
+
+class ScheduleInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ScheduleInfo
+        fields = (
+            'date',
+            'start_time',
+            'end_time'
+        )
