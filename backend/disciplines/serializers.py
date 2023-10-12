@@ -71,3 +71,13 @@ class RegistrationToDisciplineSerializer(serializers.ModelSerializer):
     class Meta:
         model = RegistrationToDiscipline
         fields = '__all__'
+
+    def create(self, validated_data):
+        lesson_dates_data = validated_data.pop('lesson_dates')
+        instance = RegistrationToDiscipline.objects.create(**validated_data)
+        lesson_dates = [
+            {'date': item['date'].strftime('%Y-%m-%d'), 'time': item['time']}
+            for item in lesson_dates_data]
+        instance.lesson_dates = lesson_dates
+        instance.save()
+        return instance
