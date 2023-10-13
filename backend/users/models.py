@@ -64,6 +64,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     USER_TYPES = (
         ('student', 'Ученик'),
         ('teacher', 'Преподаватель'),
+        ('admin', 'Администратор'),
     )
     email = models.EmailField(
         db_index=True,
