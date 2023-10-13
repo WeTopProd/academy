@@ -55,10 +55,15 @@ class Cost(models.Model):
         ordering = ['name']
 
     def __str__(self):
-        return self.name
+        return f'{self.name} - {self.price}: {self.type}'
 
 
 class Discipline(models.Model):
+    user = models.ManyToManyField(
+        'users.User',
+        verbose_name='Преподаватель',
+        related_name='discipline_teacher',
+    )
     name = models.CharField(
         max_length=255,
         verbose_name='Название дисциплины'
@@ -211,4 +216,4 @@ class RegistrationToDiscipline(models.Model):
         ordering = ('-pk',)
 
     def __str__(self):
-        return str(self.discipline)
+        return f'{str(self.discipline)} - {self.user}'

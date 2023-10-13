@@ -22,6 +22,8 @@ class SkillAdmin(admin.ModelAdmin):
 class CostAdmin(admin.ModelAdmin):
     list_display = (
         'name',
+        'price',
+        'type'
     )
 
 
@@ -40,9 +42,13 @@ class AdditionalPersonAdmin(admin.ModelAdmin):
 
 @admin.register(Discipline)
 class DisciplineAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-    list_display_links = ('name',)
+    list_display = (
+        'name',
+        'lesson_duration',
+        'recommended_lesson_count'
+    )
     search_fields = ('name',)
+    list_filter = ('name', 'lesson_duration')
 
 
 @admin.register(TypeLesson)
