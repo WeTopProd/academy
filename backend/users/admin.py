@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
 
-from .models import User, Schedule, ScheduleInfo
+from .models import Schedule, ScheduleInfo, User
 
 
 @admin.register(User)

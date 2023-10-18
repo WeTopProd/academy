@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
-from .models import (Cost, CountLesson, Discipline, RegistrationToDiscipline,
-                     Skill, TypeLesson)
+from .models import (Cost, CountLesson, Discipline, DisciplineTeacher, Future,
+                     RegistrationToDiscipline, Skill, Teacher, TeacherInfo,
+                     TypeLesson)
 
 
 class SkillSerializer(serializers.ModelSerializer):
@@ -42,6 +43,34 @@ class DisciplineSerializer(serializers.ModelSerializer):
         if obj.skills.exists():
             return list(obj.skills.values_list('name', flat=True))
         return None
+
+
+class FutureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Future
+        fields = '__all__'
+
+
+class DisciplineTeacherSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DisciplineTeacher
+        fields = '__all__'
+
+
+class TeacherSerializer(serializers.ModelSerializer):
+    disciplines = DisciplineTeacherSerializer(many=True)
+
+    class Meta:
+        model = Teacher
+        fields = '__all__'
+
+
+class TeacherInfoSerializer(serializers.ModelSerializer):
+    disciplines = DisciplineTeacherSerializer(many=True)
+
+    class Meta:
+        model = TeacherInfo
+        fields = '__all__'
 
 
 class TypeLessonSerializer(serializers.ModelSerializer):

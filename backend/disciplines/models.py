@@ -34,6 +34,21 @@ class CostType(models.Model):
         return self.name
 
 
+class Future(models.Model):
+    name = models.CharField(
+        max_length=255,
+        verbose_name='Навык, полученный на занятии'
+    )
+
+    class Meta:
+        verbose_name = 'Навык, полученный на занятии'
+        verbose_name_plural = 'Навык, полученный на занятии'
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+
 class Cost(models.Model):
     name = models.CharField(
         max_length=255,
@@ -62,7 +77,7 @@ class Discipline(models.Model):
     user = models.ManyToManyField(
         'users.User',
         verbose_name='Преподаватель',
-        related_name='discipline_teacher',
+        related_name='discipline_teacher_set',
     )
     name = models.CharField(
         max_length=255,
@@ -217,3 +232,81 @@ class RegistrationToDiscipline(models.Model):
 
     def __str__(self):
         return f'{str(self.discipline)} - {self.user}'
+
+
+class DisciplineTeacher(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Название')
+    attr = models.CharField(max_length=255, verbose_name='Атрибут')
+
+    class Meta:
+        verbose_name = 'Дисциплина преподавателя'
+        verbose_name_plural = 'Дисциплины преподавателя'
+
+    def __str__(self):
+        return f'{self.name} {self.attr}'
+
+
+class Teacher(models.Model):
+    user = models.ForeignKey(
+        'users.User',
+        verbose_name='Преподаватель',
+        related_name='discipline_teacher',
+        on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=255)
+    full_name = models.CharField(max_length=255)
+    image_url = models.ImageField(
+        upload_to='backend_media/',
+        verbose_name='Изображение'
+    )
+    description = models.TextField()
+    disciplines = models.ManyToManyField(
+        DisciplineTeacher,
+        verbose_name='Дисциплина',
+        related_name='discipline_teacher'
+    )
+    skills = models.ManyToManyField(Skill, verbose_name='Навыки преподавателя')
+    greetings = models.TextField(verbose_name='Приветствие')
+    unique = models.TextField(verbose_name='Уникальность занятий')
+    future = models.ForeignKey(
+        Future,
+        on_delete=models.CASCADE,
+        verbose_name='Навыки, которые будут получены'
+    )
+
+    class Meta:
+        verbose_name = 'Преподаватель'
+        verbose_name_plural = 'Преподаватели'
+
+    def __str__(self):
+        return self.name
+
+
+class TeacherInfo(models.Model):
+    user = models.ForeignKey(
+        'users.User',
+        verbose_name='Преподаватель',
+        related_name='teacher_discipline_set',
+        on_delete=models.CASCADE
+    )
+    full_name = models.CharField(max_length=100)
+    disciplines = models.ManyToManyField(
+        DisciplineTeacher,
+        verbose_name='Дисциплина',
+        related_name='discipline_teacher_info'
+    )
+    skills = models.ManyToManyField(Skill, verbose_name='Навыки преподавателя')
+    greetings = models.TextField(verbose_name='Приветствие')
+    unique = models.TextField(verbose_name='Уникальность занятий')
+    future = models.ForeignKey(
+        Future,
+        on_delete=models.CASCADE,
+        verbose_name='Навыки, которые будут получены'
+    )
+
+    class Meta:
+        verbose_name = 'Информация преподавателя'
+        verbose_name_plural = 'Информации преподавателя'
+
+    def __str__(self):
+        return self.full_name

@@ -1,10 +1,11 @@
-from disciplines.models import Discipline
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
+from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.db import models
-from django.core.exceptions import ValidationError
 from phonenumber_field.modelfields import PhoneNumberField
+
+from disciplines.models import Discipline
 
 from .managers import UserManager
 from .validators import validate_phone_number

@@ -2,10 +2,11 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 
 from .filters import RegistrationFilter
-from .models import Discipline, RegistrationToDiscipline
+from .models import Discipline, RegistrationToDiscipline, Teacher, TeacherInfo
 from .permissions import IsOwnerOrReadOnly
 from .serializers import (DisciplineSerializer,
-                          RegistrationToDisciplineSerializer)
+                          RegistrationToDisciplineSerializer,
+                          TeacherInfoSerializer, TeacherSerializer)
 
 
 class DisciplineViewSet(viewsets.ModelViewSet):
@@ -30,3 +31,13 @@ class RegistrationViewSet(viewsets.ModelViewSet):
             )
         else:
             return RegistrationToDiscipline.objects.none()
+
+
+class TeacherViewSet(viewsets.ModelViewSet):
+    queryset = Teacher.objects.all()
+    serializer_class = TeacherSerializer
+
+
+class TeacherInfoViewSet(viewsets.ModelViewSet):
+    queryset = TeacherInfo.objects.all()
+    serializer_class = TeacherInfoSerializer

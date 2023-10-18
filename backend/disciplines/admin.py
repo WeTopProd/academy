@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 from .models import (AdditionalPerson, Cost, CostType, CountLesson, Discipline,
-                     RegistrationToDiscipline, Skill, TypeLesson)
+                     DisciplineTeacher, Future, RegistrationToDiscipline,
+                     Skill, Teacher, TeacherInfo, TypeLesson)
 
 
 @admin.register(CostType)
@@ -63,6 +64,34 @@ class CountLessonAdmin(admin.ModelAdmin):
     list_display = ('name',)
     list_display_links = ('name',)
     search_fields = ('name',)
+
+
+@admin.register(Future)
+class FutureAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+    )
+
+
+@admin.register(DisciplineTeacher)
+class DisciplineTeacherAdmin(admin.ModelAdmin):
+    list_display = ('name', 'attr')
+
+
+@admin.register(Teacher)
+class TeacherAdmin(admin.ModelAdmin):
+    list_display = ('name', 'full_name', 'user')
+    list_filter = ('disciplines', 'skills')
+    search_fields = ('name', 'full_name', 'user__username')
+    filter_horizontal = ('disciplines', 'skills')
+
+
+@admin.register(TeacherInfo)
+class TeacherInfoAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'user')
+    list_filter = ('disciplines', 'skills')
+    search_fields = ('full_name', 'user__username')
+    filter_horizontal = ('disciplines', 'skills')
 
 
 @admin.register(RegistrationToDiscipline)
