@@ -184,7 +184,9 @@ class RegistrationToDiscipline(models.Model):
         'users.User',
         verbose_name='Ученик',
         related_name='discipline_user',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
     )
     discipline = models.ForeignKey(
         Discipline,
