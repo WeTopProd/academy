@@ -185,13 +185,19 @@ class RegistrationToDiscipline(models.Model):
         verbose_name='Ученик',
         related_name='discipline_user',
         on_delete=models.CASCADE,
-        null=True,
-        blank=True
     )
     discipline = models.ForeignKey(
         Discipline,
         on_delete=models.CASCADE,
         verbose_name='Тип дисциплины'
+    )
+    teacher = models.ForeignKey(
+        'users.User',
+        on_delete=models.CASCADE,
+        related_name='teacher_user',
+        verbose_name='Преподаватель',
+        blank=True,
+        null=True
     )
     type_lessons = models.ForeignKey(
         TypeLesson,
