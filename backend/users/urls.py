@@ -1,10 +1,11 @@
 from django.urls import include, path
 from djoser.views import TokenCreateView
 
-from .views import TokenCreateByPhoneView, send_email
+from .views import TokenCreateByPhoneView, send_email, UserList
 
 urlpatterns = [
     path('', include('djoser.urls')),
+    path('all-users/', UserList.as_view(), name='all_users'),
     path('auth/', include('djoser.urls.authtoken')),
     path('auth/token-email/',
          TokenCreateView.as_view(),

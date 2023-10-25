@@ -14,8 +14,13 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .backends import PhoneBackend
-from .models import Schedule
-from .serializers import ScheduleSerializer
+from .models import Schedule, User
+from .serializers import ScheduleSerializer, UserSerializer
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 class UserScheduleList(generics.ListAPIView):
