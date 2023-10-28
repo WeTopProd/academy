@@ -2,7 +2,10 @@ import base64
 
 import requests
 from django.contrib.auth import authenticate
-from django.core.mail import EmailMessage, send_mail
+from django.shortcuts import get_object_or_404
+from datetime import datetime
+from django.conf import settings
+from django.core.mail import send_mail
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
@@ -16,7 +19,7 @@ from rest_framework.views import APIView
 from .backends import PhoneBackend
 from .models import Schedule, User
 from .serializers import ScheduleSerializer, UserSerializer
-
+from disciplines.models import Discipline
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
@@ -64,43 +67,69 @@ class TokenCreateByPhoneView(APIView):
 @permission_classes([IsAuthenticated])
 def send_email(request):
     user = request.user
-    date = request.data.get('date', '')
-    description = request.data.get('description', '')
-    num_card = request.data.get('num_card', '')
+    now = datetime.now()
+    date = now.strftime("%d %B %Y, %A %H:%M")
+    discipline = request.data.get('discipline', '')
+
     first_name = user.first_name
     last_name = user.last_name
     phone = user.phone
     email_user = user.email
-    if not description or not date or not num_card:
-        return Response({'error': 'Отсутствуют обязательные поля в запросе'},
-                        status=status.HTTP_400_BAD_REQUEST)
 
-    if 'file' in request.FILES:
-        file = request.FILES['file']
-        message = (f"Заявка на возврат от {last_name} {first_name}\n"
-                   f"Дата заказа пользователем: {date}\n"
-                   f"Номер телефона: {phone}\nПочта: {email_user}\n\n"
-                   f"Сообщение от пользователя:\n{description}\nФайлы: {file}")
-        email = EmailMessage(
-            f"Заявка на возврат от {last_name} {first_name}",
-            message,
-            'info@tyteda.ru',
-            ['info@tyteda.ru'],
-            reply_to=[email_user],
-        )
-        email.attach(file.name, file.read(), file.content_type)
-        email.send()
-    else:
-        message = (f"Заявка на возврат от {last_name} {first_name}\n"
-                   f"Номер телефона: {phone}\nПочта: {email_user}\n\n"
-                   f"Сообщение от пользователя:\n{description}")
-        send_mail(
-            f"Заявка на возврат от {last_name} {first_name}",
-            message,
-            'info@tyteda.ru',
-            ['info@tyteda.ru'],
-            fail_silently=False,
-        )
+    message = (f"ЗАПИСЬ НА ДИСЦИПЛИНУ ОТ {last_name} {first_name}\n\n"
+               f"НОМЕР ТЕЛЕФОНА: {phone}\nПОЧТА: {email_user}\n\n"
+               f"ЗАПИСЬ:\nДАТА ЗАПИСИ: {date}\nДИСЦИПЛИНА:{discipline}")
+
+    send_mail(
+        f"ЗАПИСЬ НА ДИСЦИПЛИНУ ОТ {last_name} {first_name}",
+        message,
+        settings.DEFAULT_FROM_EMAIL,
+        [settings.DEFAULT_FROM_EMAIL],
+        fail_silently=False,
+    )
+    return Response({'success': 'Сообщение успешно отправлено'})
+
+
+@api_view(['POST'])
+def send_application(request):
+    now = datetime.now()
+    date = now.strftime("%d %B %Y, %A %H:%M")
+    first_name = request.data.get('first_name', '')
+    phone = request.data.get('phone', '')
+
+    message = (f"ЗАПИСЬ НА ОБРАТНУЮ СВЯЗЬ ОТ {first_name}\n\n"
+               f"НОМЕР ТЕЛЕФОНА: {phone}\nДАТА: {date}")
+
+    send_mail(
+        f"ЗАПИСЬ НА ОБРАТНУЮ СВЯЗЬ ОТ {first_name}",
+        message,
+        settings.DEFAULT_FROM_EMAIL,
+        [settings.DEFAULT_FROM_EMAIL],
+        fail_silently=False,
+    )
+    return Response({'success': 'Сообщение успешно отправлено'})
+
+
+@api_view(['POST'])
+def send_first_lesson(request):
+    now = datetime.now()
+    date = now.strftime("%d %B %Y, %A %H:%M")
+    first_name = request.data.get('first_name', '')
+    discipline_id = request.data.get('discipline_id', '')
+    discipline = get_object_or_404(Discipline, pk=int(discipline_id))
+    phone = request.data.get('phone', '')
+
+    message = (f"ЗАПИСЬ НА ПЕРВОЕ БЕСПЛАТНОЕ ЗАНЯТИЕ ОТ {first_name}\n\n"
+               f"НОМЕР ТЕЛЕФОНА: {phone}\nДАТА: {date}\n"
+               f"ДИСЦИПЛИНА:{discipline}")
+
+    send_mail(
+        f"ЗАПИСЬ НА ОБРАТНУЮ СВЯЗЬ ОТ {first_name}",
+        message,
+        settings.DEFAULT_FROM_EMAIL,
+        [settings.DEFAULT_FROM_EMAIL],
+        fail_silently=False,
+    )
     return Response({'success': 'Сообщение успешно отправлено'})
 
 

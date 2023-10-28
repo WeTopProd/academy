@@ -123,6 +123,23 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name='Расписание занятий',
         blank=True,
     )
+    teachers_openWindow_Sceduele = models.JSONField(
+        verbose_name='Учителя открывают окно: Расписание',
+        default=list,
+    )
+    teachers_assigned_Sceduele = models.JSONField(
+        verbose_name='Назначенные преподаватели: Расписание',
+        default=list,
+    )
+    registration = models.JSONField(
+        verbose_name='Регистрация',
+        default=list,
+    )
+    certificates = models.JSONField(
+        verbose_name='Сертификат',
+        default=list,
+    )
+
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
