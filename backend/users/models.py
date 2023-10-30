@@ -126,18 +126,26 @@ class User(AbstractBaseUser, PermissionsMixin):
     teachers_openWindow_Sceduele = models.JSONField(
         verbose_name='Учителя открывают окно: Расписание',
         default=list,
+        blank=True,
+        null=True
     )
     teachers_assigned_Sceduele = models.JSONField(
         verbose_name='Назначенные преподаватели: Расписание',
         default=list,
+        blank=True,
+        null=True
     )
     registration = models.JSONField(
         verbose_name='Регистрация',
         default=list,
+        blank=True,
+        null=True
     )
     certificates = models.JSONField(
         verbose_name='Сертификат',
         default=list,
+        blank=True,
+        null=True
     )
 
     is_active = models.BooleanField(default=True)
