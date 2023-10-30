@@ -3,6 +3,29 @@ from phonenumber_field.serializerfields import PhoneNumberField
 from rest_framework import serializers
 
 from .models import Schedule, ScheduleInfo
+from disciplines.models import Discipline
+
+class Teachers_openWindow_ScedueleSerializer(serializers.Serializer):
+    date = serializers.DateField()
+    start_time = serializers.CharField()
+    end_time = serializers.CharField()
+
+
+class Teachers_assigned_ScedueleSerializer(serializers.Serializer):
+    date = serializers.DateField()
+    class_start_time = serializers.CharField()
+    class_end_time = serializers.CharField()
+
+
+class RegistrationSerializer(serializers.Serializer):
+    isDone = serializers.BooleanField()
+
+
+class CertificatesSerializer(serializers.Serializer):
+    discipline_id = serializers.IntegerField()
+    hours = serializers.IntegerField()
+    user_id = serializers.IntegerField()
+    registration_id = serializers.IntegerField()
 
 
 class UserCreateSerializer(UserCreateSerializer):
@@ -37,6 +60,14 @@ class UserSerializer(UserSerializer):
         format='%d.%m.%Y', input_formats=['%d.%m.%Y']
     )
     photo = serializers.ImageField(max_length=None, use_url=True)
+    teachers_openWindow_Sceduele = Teachers_openWindow_ScedueleSerializer(
+        many=True
+    )
+    teachers_assigned_Sceduele = Teachers_assigned_ScedueleSerializer(
+        many=True
+    )
+    registration = RegistrationSerializer(many=True)
+    certificates = CertificatesSerializer(many=True)
 
     class Meta(UserSerializer.Meta):
         ref_name = 'CustomUserSerializer'
@@ -50,6 +81,10 @@ class UserSerializer(UserSerializer):
             'user_type',
             'discipline',
             'schedule',
+            'teachers_openWindow_Sceduele',
+            'teachers_assigned_Sceduele',
+            'certificates',
+            'registration',
             'phone'
         )
 
