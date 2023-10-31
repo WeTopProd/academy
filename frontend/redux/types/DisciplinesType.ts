@@ -38,15 +38,15 @@ export interface DisciplinesType {
   id: number;
   name: string;
   name_sklonenie: string;
-  type: DisciplinesTypes;
-  ImageURL: string;
-  ImageType: string;
+  type?: DisciplinesTypes | any;
+  image_url: string;
+  ImageType?: string;
   ImageURLResize?: string;
   description: string;
   lesson_duration: string;
-  cost: Icost[];
+  cost: Icost[] | any;
   skills: string[];
-  recomended_lesson_count: string;
+  recommended_lesson_count: string;
 }
 
 export type DisciplineId = {
@@ -55,18 +55,29 @@ export type DisciplineId = {
 
 export type ChosenDiscipline = {
   count_people: number;
-  date: string;
-  time: string;
+  lesson_dates: [{ date: string; time: string }] | [];
   start_lessons: string;
   type_payment: string;
   discipline: number | false;
   type_lessons: number;
   count_lessons: number;
   additional_person: number;
+  general_time: string;
 };
 
 export type DisciplineChooseControl = {
   DSC_id: DisciplineId | false;
   step: number;
   chosen: ChosenDiscipline;
+  done: boolean;
+  stepPolControl: {
+    1: {
+      discipline: boolean;
+      type_lessons: boolean;
+      count_lessons: boolean;
+      count_people: boolean;
+    };
+    2: { start_lessons: boolean; general_time: boolean };
+    3: { type_payment: boolean };
+  };
 };

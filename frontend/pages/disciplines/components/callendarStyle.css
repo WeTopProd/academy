@@ -1,11 +1,10 @@
 :root {
-  --rmdp-primary-yellow:  #A69249;
+  --rmdp-primary-yellow: #a69249;
   --rmdp-secondary-yellow: #c0b025;
   --rmdp-shadow-yellow: #dfdd61;
-  --rmdp-today-yellow: #D9D9D9;
-  --rmdp-hover-yellow: #afac02;
+  --rmdp-today-yellow: #d9d9d9;
+  --rmdp-hover-yellow: #747234;
   --rmdp-deselect-yellow: #afac02;
-  
 }
 
 .yellow .rmdp-wrapper {
@@ -79,3 +78,10 @@
 .yellow .rmdp-button:not(.rmdp-action-button):hover {
   background-color: var(--rmdp-deselect-yellow);
 }
+/* 
+.yellow {
+  position: relative;
+  left: 50%;
+  border-radius: 30px;
+  bottom: 70%;
+} */

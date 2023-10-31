@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import styles from '../styles.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { switchUserProfile } from '../../../redux/slices/user/userSlice';
+import TeacherUserProfile from './TeacherUserProfile';
+import AdminUserProfile from './AdminUserProfile';
 
 const MainUserProfile = ():JSX.Element => {
   const { user } = useAppSelector((state) => state.user);
@@ -23,7 +25,9 @@ const MainUserProfile = ():JSX.Element => {
   };
 
   return (
-    <div className={styles.mainWrapper}>
+    <>
+
+    {user.user_type == 'teacher'?<TeacherUserProfile /> :(user.user_type == 'admin')? <AdminUserProfile /> :<div className={styles.mainWrapper}>
       <div className={styles.block1Wrapper}>
         <h1>Личный кабинет</h1>
         <h2>
@@ -43,7 +47,9 @@ const MainUserProfile = ():JSX.Element => {
         <span>У вас есть одно бесплатное пробное занятие </span>
         <button>Использовать</button>
       </div>
-    </div>
+    </div>}
+    </>
+    
   );
 };
 

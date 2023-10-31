@@ -3,19 +3,19 @@ import { createSlice } from '@reduxjs/toolkit';
 import { DisciplinesType } from '../../types/DisciplinesType';
 import disciplineSeed from './seeds/disciplinesSeed';
 
-const initialState: DisciplinesType[] = disciplineSeed;
+const initialState: {data:DisciplinesType[]} = {data:[]};
 
 export const disciplines = createSlice({
   name: 'disciplines',
   initialState,
   reducers: {
-    // getOneTeacher:(state, action) => {
-    //     return state.filter((el)=>el.id == action)
-    // }
-    
+    disciplineInit: (state, action) => {      
+      // state.data = [...state.data, ...action.payload]
+      state.data = action.payload
+    },
   },
 });
 
-// export const {getOneTeacher} = disciplines.actions
+export const { disciplineInit } = disciplines.actions;
 
 export default disciplines.reducer;

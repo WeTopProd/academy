@@ -13,7 +13,7 @@ const Teacher = ({ name, ImageURL, description, id }) => {
         router.push(`/teachers/${id}`);
       }}
     >
-      <Image src={ImageURL + '.png'} width={200} height={200} alt="name" />
+      <Image src={ImageURL} width={200} height={200} alt="name" />
       <div className={styles.text_wrapper}>
         <h2>{name}</h2>
         <h3>{description}</h3>

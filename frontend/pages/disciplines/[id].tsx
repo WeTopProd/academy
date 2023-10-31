@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import styles from './Disciplines.module.scss';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
@@ -6,37 +6,57 @@ import Image from 'next/image';
 import Banner from '../../components/PageComponents/Main/Banner/Banner';
 import Gallery from '../../components/PageComponents/Main/Gallery/Gallery';
 import { useDispatch } from 'react-redux';
-import { chooseDiscipline } from '../../redux/slices/disciplines/disciplineChooseControlSlice';
+import {
+  chooseDiscipline,
+  nextBtn,
+} from '../../redux/slices/disciplines/disciplineChooseControlSlice';
+import { disciplinesApi } from '../../redux/api/disciplinesApi';
+import { disciplineInit } from '../../redux/slices/disciplines/disciplinesSlice';
 
 const Disciplines: FC = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { id } = router.query;
 
-  const disciplines = useAppSelector((state) =>
-    state.disciplines.find((item) => {
-      return item.id == Number(id);
-    })
-  );
+
+  const disciplines = useAppSelector((state) => state.disciplines.data.find(el=>Number(el.id) == Number(id)))
+
+  const disciplinesAll = useAppSelector(state=>state.disciplines.data)
+  useEffect(() => {
+    disciplinesAll.length == 0 &&
+      disciplinesApi
+        .get()
+        .then((data) => dispatch(disciplineInit(data)))
+  }, [disciplinesAll]);
+
+
 
   const teacher = useAppSelector((state) =>
-    state.teacher.filter((item) => {
-      return item.disciplines.map((i) => i.name)
-    //   .includes(disciplines?.type);
+    state.teacher.data.filter((item) => {
+      return item.disciplines.map((i) => i.name);
     })
   );
 
   const onChoose = (id) => {
     dispatch(chooseDiscipline(id));
+    dispatch(nextBtn(1));
     router.push('/disciplines/reg');
   };
+  var teacherListForDis =     useAppSelector((state) => {
+    return state.teacher.data.filter(teacher => teacher.disciplines.some(discipline => discipline.name === disciplines?.name));
+  })
+  
+  useEffect(()=>{
+    console.log(disciplines,'----');
+    
+  },[])
 
   return disciplines ? (
     <main className={styles.disciplines_wrapper}>
       <section className={styles.disciplines_title_container}>
         <div className={styles.disciplines_title}>
           <Image
-            src={disciplines.ImageURL + disciplines?.ImageType}
+            src={disciplines.image_url}
             width={700}
             height={400}
             alt="Фото"
@@ -48,7 +68,7 @@ const Disciplines: FC = () => {
               <p>{disciplines.description}</p>
             </div>
 
-            <button onClick={(e)=>onChoose(disciplines.id)}>
+            <button onClick={(e) => onChoose(disciplines.id)}>
               Записаться <span>на курс</span>
             </button>
           </div>
@@ -80,23 +100,23 @@ const Disciplines: FC = () => {
           })}
         </ul>
         <span className={styles.recomended}>
-          Рекомендуемый курс - {disciplines.recomended_lesson_count} занятий
+          Рекомендуемый курс - {disciplines.recommended_lesson_count} занятий
         </span>
       </section>
       <section className={styles.teacher_wrapper}>
-        <h1>Преподаватели по актерскому мастерству</h1>
+        <h1>Преподаватели по {disciplines.name_sklonenie}</h1>
         <div className={styles.teacher_container}>
           {teacher.length ? (
-            teacher.map((item) => {
+            teacherListForDis.map((item) => {
               return (
                 <div className={styles.teacher}>
                   <Image
-                    src={item.ImageURL + '.png'}
+                    src={item.image_url + '.png'}
                     width={200}
                     height={200}
                     alt="Фото учителя"
                   />
-                  <span>{item.fullName}</span>
+                  <span>{item.full_name}</span>
                 </div>
               );
             })

@@ -91,25 +91,25 @@ const Header = (): JSX.Element => {
           </Link>
           <ul className="menu">
             <li>
-              <Link href="#about" onClick={handler.scroll}>
+              <Link href="/#about" onClick={handler.scroll}>
                 <Image src={aboutpng} alt="О нас" />
                 <span>О нас</span>
               </Link>
             </li>
             <li>
-              <Link href="#disciplines" onClick={handler.scroll}>
+              <Link href="/#disciplines" onClick={handler.scroll}>
                 <Image src={disc} alt="Дисциплины" />
                 <span> Дисциплины</span>
               </Link>
             </li>
             <li>
-              <Link href="#teachers" onClick={handler.scroll}>
+              <Link href="/#teachers" onClick={handler.scroll}>
                 <Image src={teachers} alt="Преподователи" />
                 <span>Преподаватели</span>
               </Link>
             </li>
             <li>
-              <Link href="#questions" onClick={handler.scroll}>
+              <Link href="/#questions" onClick={handler.scroll}>
                 <Image src={answers} alt="Ответы на вопросы" />
                 <span>Ответы на вопросы</span>
               </Link>

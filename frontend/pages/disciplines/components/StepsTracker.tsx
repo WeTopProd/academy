@@ -7,6 +7,7 @@ const StepsTracker = () => {
 
   return (
     <>
+    
       {step == 1 ? (
         <>
           <div className={styles.stepActive}>

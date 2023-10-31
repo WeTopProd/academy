@@ -820,17 +820,33 @@
       gap: 20px;
     }
     .nextBtnDiv {
-      width: 50%;
+      width: 30%;
+      margin-left: 10%;
       button {
-        display: inline-flex;
         padding: 12px 30px;
-        align-items: flex-start;
-        gap: 41px;
+        position: relative;
+        top: 100px;
         border: 0;
         color: #fff;
 
         border-radius: 50px;
         background: linear-gradient(180deg, #a69249 0%, #5b4b32 100%);
+      }
+    }
+    .backBtnDiv {
+      width: 30%;
+      margin-left: 50px;
+      margin-right: 10%;
+      button {
+        padding: 12px 30px;
+        position: relative;
+        top: 100px;
+        border: 0;
+        color: black;
+
+        border-radius: 50px;
+        background: #d6d6d6;
+        //   background: linear-gradient(180deg, #a69249 0%, #5b4b32 100%);
       }
     }
     .Block3Inputs {
@@ -855,3 +871,154 @@
   }
 }
 
+.input {
+  width: 300px;
+  height: 35px;
+  border-radius: 60px;
+  background: #fff;
+  border: 0;
+  padding: 3px 10px;
+}
+
+.step2Wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 120px;
+  .step2Div1 {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+  }
+}
+.step3Wrapper {
+  display: flex;
+  justify-content: space-around;
+  .step3Div1 {
+    padding-top: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    input {
+      /* ...existing styles */
+      display: grid;
+      place-content: center;
+    }
+
+    input::before {
+      content: '';
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      transform: scale(1);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 2rem 2rem #a69249;
+    }
+
+    input:checked::before {
+      transform: scale(1);
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      box-shadow: inset 1rem 1rem #a69249;
+      border: #000000 10px solid;
+    }
+  }
+  .step3Div2 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    span {
+      font-size: 16px;
+      font-weight: 700;
+    }
+  }
+}
+// .input_Radios{
+//     margin-right: 150px;
+// }
+
+.step3RadiusInputDiv {
+  display: flex;
+  gap: 30px;
+}
+
+.paymentText {
+  margin-top: 50px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px; /* 160% */
+  background: linear-gradient(180deg, #a69249 0%, #5b4b32 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.paymentDone {
+  margin: 100px auto;
+  width: 70%;
+  height: 450px;
+  border-radius: 60px;
+  background: linear-gradient(180deg, #a69249 0%, #5b4b32 100%);
+  font-family: Montserrat;
+  padding-bottom: 5%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    color: #fff;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 80px; /* 160% */
+    text-transform: uppercase;
+    text-align: center;
+  }
+  h2 {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+    text-align: center;
+  }
+}
+
+.POLYACONTROL {
+  position: relative;
+  font-size: 12px;
+left: 55%;
+  color: red;
+}
+
+.DONE_DIV{
+  margin-top: 50px;
+  display: flex;
+  gap: 20px;
+}
+.DONE_BTN{
+  display: flex;
+width: 130px;
+height: 40px;
+padding: 20px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+border:0;
+border-radius: 50px;
+background: #FFF;
+
+/* Drop Shadow */
+box-shadow: 10px 4px 20px 0px rgba(0, 0, 0, 0.32), -10px -10px 10px 0px rgba(255, 255, 255, 0.04);
+
+label{
+  font-weight: 700;
+  background:  linear-gradient(180deg, #A69249 0%, #5B4B32 100%);
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+}

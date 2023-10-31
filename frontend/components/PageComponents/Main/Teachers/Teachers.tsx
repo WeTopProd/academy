@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import H1 from '../../../UniversalComponents/H1/H1';
 import TeacherSlider from '../../../UniversalComponents/TeacherSlider/TeacherSlider';
 import Teacher from './Teacher/Teacher';
@@ -6,6 +6,8 @@ import styles from './Teachers.module.scss';
 import { SwiperSlide } from "swiper/react";
 import { useSelector } from 'react-redux';
 import { useAppDispatch, useAppSelector } from '../../../../redux/store';
+import { teachersApi } from '../../../../redux/api/teachersApi';
+import { teachersInit } from '../../../../redux/slices/teacher/teacherSlice';
 
 
 
@@ -39,8 +41,17 @@ const Teachers = () => {
     //     },
     // ]
 
-    const teachers = useAppSelector((state) => state.teacher)
+
+    const teachers = useAppSelector((state) => state.teacher.data)
     const dispatch = useAppDispatch()
+    useEffect(()=>{
+        teachers.length == 0 &&
+        teachersApi.get().then(data=>{
+            
+            dispatch(teachersInit(data))})
+        console.log(teachers,'0-0-0-0-0');
+        
+    },[teachers])
     
 
     return (
@@ -52,7 +63,7 @@ const Teachers = () => {
                     return <SwiperSlide key={item.id}>
                         <Teacher
                             name={item.name}
-                            ImageURL={item.ImageURL}
+                            ImageURL={item.image_url}
                             description={item.description} 
                             id={item.id}
                         />

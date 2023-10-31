@@ -13,6 +13,7 @@ const initialState = {
     user_type: null,
   },
   userProfilePageStatus: 'MainUserProfile',
+  allUsers:[]
 };
 
 export const user = createSlice({
@@ -34,9 +35,13 @@ export const user = createSlice({
     switchUserProfile: (state, action) => {
       state.userProfilePageStatus = action.payload;
     },
+
+    allUsersInit:(state,action)=>{
+      state.allUsers=action.payload
+    }
   },
 });
 
-export const { userInit, userEdit,userLogOut, switchUserProfile } = user.actions;
+export const { userInit, userEdit,userLogOut, switchUserProfile,allUsersInit } = user.actions;
 
 export default user.reducer;

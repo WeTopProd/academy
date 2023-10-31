@@ -14,12 +14,43 @@ const Block3Step1 = () => {
     (state) => state.disciplineChooseControl.chosen
   );
 
-  const disciplines = useAppSelector((state) => state.disciplines);
+  const disciplines = useAppSelector((state) => state.disciplines.data);
   const dispatch = useAppDispatch();
+
+  const stepControl = useAppSelector(
+    (state) => state.disciplineChooseControl.stepPolControl[1]
+  );
 
   var chosen = disciplines.filter((el) => el.id == id)[0];
 
-  const countClasses = [1, 2, 3, 5, 10, 20, 30];
+  const maxClassCount = chosen.cost[chosen.cost.length - 1].name.replace(
+    /\D/g,
+    ''
+  );
+  function countClassesF(max) {
+    var num = Number(max);
+    let result = [];
+    while (num > 1) {
+      result.push(num);
+
+      if (num % 10 === 0 && num != 10) {
+        num -= 10;
+      } else if (num == 10) {
+        num -= 5;
+      } else {
+        num -= 1;
+      }
+    }
+
+    result.push(num);
+    return result.reverse();
+  }
+  const countClasses = countClassesF(maxClassCount);
+
+  // useEffect(() => {
+  //   countClassesF(maxClassCount);
+  //   console.log(countClasses);
+  // }, [maxClassCount]);
 
   const onChange = {
     disciplines: (e) => {
@@ -38,9 +69,16 @@ const Block3Step1 = () => {
 
   return (
     <>
+      {stepControl.discipline ? (
+        <label className={styles.POLYACONTROL}>обязательные поля»</label>
+      ) : null}
       <div className={styles.Block3Inputs}>
         <span>Дисциплина</span>
-        <select name="disciplines" onChange={onChange.disciplines}  className={styles.input}>
+        <select
+          name="disciplines"
+          onChange={onChange.disciplines}
+          className={styles.input}
+        >
           {disciplines.map((el) => {
             if (el.id == id) {
               return (
@@ -56,10 +94,21 @@ const Block3Step1 = () => {
       </div>
 
       {/*  */}
+      {stepControl.type_lessons ? (
+        <label className={styles.POLYACONTROL}>обязательные поля»</label>
+      ) : null}
 
       <div className={styles.Block3Inputs}>
         <span>Вид занятий</span>
-        <select value={type_lessons} name="type" onChange={onChange.type}  className={styles.input}>
+        <select
+          value={type_lessons}
+          name="type"
+          onChange={onChange.type}
+          className={styles.input}
+        >
+          <option selected disabled>
+            Choose
+          </option>
           {chosen.cost.map((el) => {
             return <option value={el.type}>{el.name}</option>;
           })}
@@ -67,6 +116,9 @@ const Block3Step1 = () => {
       </div>
 
       {/*  */}
+      {stepControl.count_lessons ? (
+        <label className={styles.POLYACONTROL}>обязательные поля»</label>
+      ) : null}
 
       <div className={styles.Block3Inputs}>
         <span>Количество уроков</span>
@@ -83,6 +135,9 @@ const Block3Step1 = () => {
       </div>
 
       {/*  */}
+      {stepControl.count_people ? (
+        <label className={styles.POLYACONTROL}>обязательные поля»</label>
+      ) : null}
 
       <div className={styles.Block3Inputs}>
         <span>Количество человек</span>
@@ -94,7 +149,6 @@ const Block3Step1 = () => {
         />
       </div>
     </>
-      
   );
 };
 

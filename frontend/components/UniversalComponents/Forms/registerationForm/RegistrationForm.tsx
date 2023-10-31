@@ -54,7 +54,8 @@ export const RegistrationForm = ({ setLogRegToggler }) => {
         const logRes = await loginApi2.getUserByPhone(phone, password);
         localStorage.setItem('token', logRes['auth_token']);
       })
-      .then(() => dispatch(closeModal(true)))
+      .then(() => {dispatch(closeModal(true))
+        window.location.reload()})
       .catch((err) => console.log(err.message));
   };
 

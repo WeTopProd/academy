@@ -5,7 +5,6 @@ import InputMask from 'react-input-mask';
 import * as Api from '../../../../redux/api/loginApi';
 import { useEffect } from 'react';
 import { phoneForBackend } from '../../../../pages/userProfile/functions/userDataCollect';
-
 // type FormValuesEmail = {
 //   email: string;
 //   password: string;
@@ -89,6 +88,7 @@ export default function LoginForm({ setLogRegToggler }) {
               value={password}
               placeholder="Пароль"
               onChange={(e) => setPassword(e.target.value)}
+              type='password'
             />
 
             <input type="submit" value="Войти" className={styles.submit} />
@@ -121,6 +121,8 @@ export default function LoginForm({ setLogRegToggler }) {
               value={password}
               placeholder="Пароль"
               onChange={(e) => setPassword(e.target.value)}
+              type='password'
+
             />
             <input type="submit" value="Войти" className={styles.submit} />
             <div className={styles.register}>
