@@ -7,8 +7,8 @@ export const teacherSeed: ITeacher[] = [
   {
     id: 1,
     name: 'Денис Моисеев',
-    fullName: 'Моисеев Денис Борисович',
-    ImageURL: '/Teachers/denis',
+    full_name: 'Моисеев Денис Борисович',
+    image_url: '/Teachers/denis',
     description: 'Педагог по актерскому мастерству, степу, клоунаде',
     disciplines: [
       {
@@ -48,8 +48,8 @@ export const teacherSeed: ITeacher[] = [
   {
     id: 2,
     name: 'Срджан Симич',
-    fullName: 'Срджан Симич',
-    ImageURL: '/Teachers/srdjan',
+    full_name: 'Срджан Симич',
+    image_url: '/Teachers/srdjan',
     description:
       'Педагог по актерскому мастерству, сценической речи, пантомимике',
     disciplines: [
@@ -88,8 +88,8 @@ export const teacherSeed: ITeacher[] = [
   {
     id: 3,
     name: 'Иван Кирюхин',
-    fullName: 'Иван Александрович Кирюхин',
-    ImageURL: '/Teachers/ivan',
+    full_name: 'Иван Александрович Кирюхин',
+    image_url: '/Teachers/ivan',
     description: 'Педагог по актерскому мастерству, ведущему, сценической речи',
     disciplines: [
       {
@@ -127,8 +127,8 @@ export const teacherSeed: ITeacher[] = [
   {
     id: 4,
     name: 'Елена Войницкая',
-    fullName: 'Хвойнитская Елена Сергеевна',
-    ImageURL: '/Teachers/elena',
+    full_name: 'Хвойнитская Елена Сергеевна',
+    image_url: '/Teachers/elena',
     description: 'Педагог по актерскому мастерству, сценической речи, стендапу',
     disciplines: [
       {
@@ -168,8 +168,8 @@ export const teacherSeed: ITeacher[] = [
   {
     id: 5,
     name: 'Алиса Мандрик',
-    fullName: 'Алиса Мандрик',
-    ImageURL: '/Teachers/alisa',
+    full_name: 'Алиса Мандрик',
+    image_url: '/Teachers/alisa',
     description:
       'Преподаватель актерского мастерства, театральной клоунады, степ.',
     disciplines: [{ name: DisciplinesTypes.vokal, attr: 'по вокалу' }],
