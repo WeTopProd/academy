@@ -42,34 +42,34 @@ const Teachers = () => {
     // ]
 
 
-    const teachers = useAppSelector((state) => state.teacher.data)
-    const dispatch = useAppDispatch()
-    useEffect(()=>{
-        teachers.length == 0 &&
-        teachersApi.get().then(data=>{
-            
-            dispatch(teachersInit(data))})
-        console.log(teachers,'0-0-0-0-0');
-        
-    },[teachers])
+    // const teachers = useAppSelector((state) => state.teacher.data)
+    // const dispatch = useAppDispatch()
+    // useEffect(()=>{
+    //     teachers.length == 0 &&
+    //     teachersApi.get().then(data=>{
+    //
+    //         dispatch(teachersInit(data))})
+    //     console.log(teachers,'0-0-0-0-0');
+    //
+    // },[teachers])
     
 
     return (
         <section className={styles.teachers_container} id='teachers'>
             <H1 text={'Наши преподаватели'} />
             <h1 className={styles.mobileL}>Преподаватели</h1>
-            <TeacherSlider>
-                {teachers.map((item) => {
-                    return <SwiperSlide key={item.id}>
-                        <Teacher
-                            name={item.name}
-                            ImageURL={item.image_url}
-                            description={item.description} 
-                            id={item.id}
-                        />
-                    </SwiperSlide>
-                })}
-            </TeacherSlider>
+            {/*<TeacherSlider>*/}
+            {/*    {teachers.map((item) => {*/}
+            {/*        return <SwiperSlide key={item.id}>*/}
+            {/*            <Teacher*/}
+            {/*                name={item.name}*/}
+            {/*                ImageURL={item.image_url}*/}
+            {/*                description={item.description} */}
+            {/*                id={item.id}*/}
+            {/*            />*/}
+            {/*        </SwiperSlide>*/}
+            {/*    })}*/}
+            {/*</TeacherSlider>*/}
         </section>
     );
 }

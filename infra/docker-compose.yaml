@@ -3,7 +3,9 @@ version: '3.8'
 services:
 
   frontend:
-    image: y4r1k/academy-frontend:latest
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     volumes:
