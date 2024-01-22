@@ -5,6 +5,7 @@ from rest_framework import serializers
 from .models import Schedule, ScheduleInfo
 from disciplines.models import Discipline
 
+
 class Teachers_openWindow_ScedueleSerializer(serializers.Serializer):
     date = serializers.DateField()
     start_time = serializers.CharField()
@@ -34,6 +35,16 @@ class UserCreateSerializer(UserCreateSerializer):
         format='%d.%m.%Y', input_formats=['%d.%m.%Y']
     )
     photo = serializers.ImageField(max_length=None, use_url=True)
+    discipline = serializers.PrimaryKeyRelatedField(
+        queryset=Discipline.objects.all(),
+        many=True,
+        required=False
+    )
+    schedule = serializers.PrimaryKeyRelatedField(
+        queryset=Schedule.objects.all(),
+        many=True,
+        required=False
+    )
 
     def validate_phone(self, value):
         return value.replace('8', '+7', 1)
@@ -47,8 +58,6 @@ class UserCreateSerializer(UserCreateSerializer):
             'date_of_birth',
             'photo',
             'user_type',
-            'discipline',
-            'schedule',
             'password',
             're_password'
         )

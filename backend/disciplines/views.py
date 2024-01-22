@@ -3,7 +3,6 @@ from rest_framework import viewsets
 
 from .filters import RegistrationFilter
 from .models import Discipline, RegistrationToDiscipline, Teacher, TeacherInfo
-from .permissions import IsOwnerOrReadOnly
 from .serializers import (DisciplineSerializer,
                           RegistrationToDisciplineSerializer,
                           TeacherInfoSerializer, TeacherSerializer)

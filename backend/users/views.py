@@ -15,11 +15,17 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import viewsets
 
 from .backends import PhoneBackend
 from .models import Schedule, User
 from .serializers import ScheduleSerializer, UserSerializer
 from disciplines.models import Discipline
+
+
+# class UserViewSet(viewsets.ModelViewSet):
+#     queryset = User.o
+
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
