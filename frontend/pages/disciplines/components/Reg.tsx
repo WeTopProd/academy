@@ -76,45 +76,45 @@ const Reg = ({ id }) => {
 
   return (
     <>
-      {!paymentStatue ? (
-        <div className={styles.disciplines_reg_mainWrapper}>
-          <div className={styles.block1}>
-            <h1>запись на дисциплину</h1>
-            {step == 1 ? (
-              <h2>Выбор дисциплины</h2>
-            ) : step == 2 ? (
-              <h2>Дата и время занятий</h2>
-            ) : (
-              <h2>Оплата</h2>
-            )}
-          </div>
-          <div className={styles.block2}>
-            <StepsTracker />
-          </div>
-          <div className={styles.block3}>
-            {step > 1 && (
-              <div className={styles.backBtnDiv}>
-                <button onClick={backButtonOnClick}>назад</button>
-              </div>
-            )}
+      {/*{!paymentStatue ? (*/}
+      {/*  <div className={styles.disciplines_reg_mainWrapper}>*/}
+      {/*    <div className={styles.block1}>*/}
+      {/*      <h1>запись на дисциплину</h1>*/}
+      {/*      {step == 1 ? (*/}
+      {/*        <h2>Выбор дисциплины</h2>*/}
+      {/*      ) : step == 2 ? (*/}
+      {/*        <h2>Дата и время занятий</h2>*/}
+      {/*      ) : (*/}
+      {/*        <h2>Оплата</h2>*/}
+      {/*      )}*/}
+      {/*    </div>*/}
+      {/*    <div className={styles.block2}>*/}
+      {/*      <StepsTracker />*/}
+      {/*    </div>*/}
+      {/*    <div className={styles.block3}>*/}
+      {/*      {step > 1 && (*/}
+      {/*        <div className={styles.backBtnDiv}>*/}
+      {/*          <button onClick={backButtonOnClick}>назад</button>*/}
+      {/*        </div>*/}
+      {/*      )}*/}
 
-            <div className={styles.innerBloc3Wrapper}>
-              {step == 1 ? (
-                <Block3Step1 />
-              ) : step == 2 ? (
-                <Block3Step2 />
-              ) : (
-                <Block3Step3 />
-              )}
-            </div>
-            <div className={styles.nextBtnDiv}>
-              <button onClick={nextButtonOnClick}>Далее</button>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <Done />
-      )}
+      {/*      <div className={styles.innerBloc3Wrapper}>*/}
+      {/*        {step == 1 ? (*/}
+      {/*          <Block3Step1 />*/}
+      {/*        ) : step == 2 ? (*/}
+      {/*          <Block3Step2 />*/}
+      {/*        ) : (*/}
+      {/*          <Block3Step3 />*/}
+      {/*        )}*/}
+      {/*      </div>*/}
+      {/*      <div className={styles.nextBtnDiv}>*/}
+      {/*        <button onClick={nextButtonOnClick}>Далее</button>*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*) : (*/}
+      {/*  <Done />*/}
+      {/*)}*/}
     </>
   );
 };

@@ -23,10 +23,10 @@ const Block3Step1 = () => {
 
   var chosen = disciplines.filter((el) => el.id == id)[0];
 
-  const maxClassCount = chosen.cost[chosen.cost.length - 1].name.replace(
-    /\D/g,
-    ''
-  );
+  // const maxClassCount = chosen.cost[chosen.cost.length - 1].name.replace(
+  //   /\D/g,
+  //   ''
+  // );
   function countClassesF(max) {
     var num = Number(max);
     let result = [];
@@ -45,7 +45,7 @@ const Block3Step1 = () => {
     result.push(num);
     return result.reverse();
   }
-  const countClasses = countClassesF(maxClassCount);
+  // const countClasses = countClassesF(maxClassCount);
 
   // useEffect(() => {
   //   countClassesF(maxClassCount);
@@ -109,9 +109,9 @@ const Block3Step1 = () => {
           <option selected disabled>
             Choose
           </option>
-          {chosen.cost.map((el) => {
-            return <option value={el.type}>{el.name}</option>;
-          })}
+          {/*{chosen.cost.map((el) => {*/}
+          {/*  return <option value={el.type}>{el.name}</option>;*/}
+          {/*})}*/}
         </select>
       </div>
 
@@ -128,9 +128,9 @@ const Block3Step1 = () => {
           onChange={onChange.countLessons}
           className={styles.input}
         >
-          {countClasses.map((el) => (
-            <option value={el}>{el}</option>
-          ))}
+          {/*{countClasses.map((el) => (*/}
+          {/*  <option value={el}>{el}</option>*/}
+          {/*))}*/}
         </select>
       </div>
 

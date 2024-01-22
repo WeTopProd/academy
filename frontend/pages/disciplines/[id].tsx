@@ -90,14 +90,14 @@ const Disciplines: FC = () => {
       <section className={styles.prices_wrapper}>
         <h1>Цены</h1>
         <ul>
-          {disciplines.cost.map((item) => {
-            return (
-              <li>
-                <span className={styles.text}>{item.name}</span>
-                <span className={styles.price}>{item.price}</span>
-              </li>
-            );
-          })}
+          {/*{disciplines.cost.map((item) => {*/}
+          {/*  return (*/}
+          {/*    <li>*/}
+          {/*      <span className={styles.text}>{item.name}</span>*/}
+          {/*      <span className={styles.price}>{item.price}</span>*/}
+          {/*    </li>*/}
+          {/*  );*/}
+          {/*})}*/}
         </ul>
         <span className={styles.recomended}>
           Рекомендуемый курс - {disciplines.recommended_lesson_count} занятий

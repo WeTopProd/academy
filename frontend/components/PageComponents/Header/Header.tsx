@@ -30,19 +30,19 @@ const Header = (): JSX.Element => {
   const user = useAppSelector((state) => state.user.user);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-
-    token.length > 5 &&
-      token != '' &&
-      loginApi2
-        .getInfoByToken(token)
-        .then((data) => {
-          console.log(data);
-          // date_of_birth: data.date_of_birth || null 
-          dispatch(userInit({ ...data, token, }))
-      });
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //
+  //   token.length > 5 &&
+  //     token != '' &&
+  //     loginApi2
+  //       .getInfoByToken(token)
+  //       .then((data) => {
+  //         console.log(data);
+  //         // date_of_birth: data.date_of_birth || null
+  //         dispatch(userInit({ ...data, token, }))
+  //     });
+  // }, []);
 
   const handler = {
     contactUs: () => {
